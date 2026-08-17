@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "sourceRoot": "apps/api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "options": {
+        "outputPath": "dist/apps/api",
+        "main": "apps/api/src/main.ts",
+        "tsConfig": "apps/api/tsconfig.json",
+        "assets": ["apps/api/src/assets"]
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": { "buildTarget": "api:build", "watch": false },
+      "configurations": {
+        "development": { "buildTarget": "api:build" }
+      }
+    },
+    "test": { "executor": "nx:run-commands", "options": { "command": "vitest run --config vitest.config.ts" } }
+  }
+}

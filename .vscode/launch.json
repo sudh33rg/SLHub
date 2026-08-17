@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug API (Launch + Build)",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "Build API",
+      "program": "${workspaceFolder}/dist/apps/api/src/main.js",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": ["--inspect"],
+      "console": "integratedTerminal",
+      "env": {
+        "PORT": "3000"
+      },
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/dist/apps/api/**/*.js",
+        "${workspaceFolder}/apps/api/**/*.ts"
+      ],
+      "outFiles": ["${workspaceFolder}/dist/apps/api/**/*.js"],
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug API (Attach)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "restart": true,
+      "autoAttachChildProcesses": true,
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/dist/apps/api/**/*.js",
+        "${workspaceFolder}/apps/api/**/*.ts"
+      ],
+      "outFiles": ["${workspaceFolder}/dist/apps/api/**/*.js"],
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}

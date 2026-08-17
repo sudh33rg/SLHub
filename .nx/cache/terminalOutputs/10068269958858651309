@@ -1,0 +1,20 @@
+(node:46241) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46243) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[4m[34mapps/web/src/api/client.ts:3:56[39m[24m - [31m[1merror[22m[39m [90mTS2339[39m: Property 'env' does not exist on type 'ImportMeta'.
+
+[0m [90m 1 | [39m[36mimport[39m axios from [32m'axios'[39m[33m;[39m[0m
+[0m [90m 2 | [39m[0m
+[0m[31m[1m>[22m[39m[90m 3 | [39m[36mexport[39m [36mconst[39m api [33m=[39m axios[33m.[39mcreate({ baseURL[33m:[39m [36mimport[39m[33m.[39mmeta[33m.[39menv[33m.[39m[33mVITE_API_URL[39m [33m||[39m [32m'http://localhost:3000/api'[39m })[33m;[39m[0m
+[0m [90m   | [39m                                                       [31m[1m^[22m[39m[0m
+[0m [90m 4 | [39m[0m
+[0m [90m 5 | [39mapi[33m.[39minterceptors[33m.[39mrequest[33m.[39muse((c) [33m=>[39m {[0m
+[0m [90m 6 | [39m  [36mconst[39m t [33m=[39m localStorage[33m.[39mgetItem([32m'token'[39m)[33m;[39m[0m
+
+Found 1 error.
+
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mFound type errors. See above.[39m
+
+Pass --verbose to see the stacktrace.
+

@@ -1,0 +1,166 @@
+Compiling with SWC for api...
+
+[1m[31mDebugger listening on ws://localhost:9229/35d8a1c9-3477-4ae8-ab6a-e51bfbacd69c[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 12858  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[1m[31m[31m[Nest] 12858  - [39m[31m08/17/2026, 6:33:36 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (1)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 12858  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 12858  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 12858  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mStarlinkModule dependencies initialized[39m[38;5;3m +1ms[39m
+[1m[31mDebugger listening on ws://localhost:9229/3beab931-da8e-43f3-b43e-26098feaee87[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 12872  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:36 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (1)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[32m[Nest] 12872  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 12872  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 12872  - [39m08/17/2026, 6:33:36 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mStarlinkModule dependencies initialized[39m[38;5;3m +0ms[39m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:39 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (2)...[39m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:42 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (3)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:45 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (4)...[39m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:48 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (5)...[39m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:51 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (6)...[39m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:54 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (7)...[39m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:33:57 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (8)...[39m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:34:00 PM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (9)...[39m[31m[39m[22m
+[1m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19)[39m[22m
+[1m[31m    at new SqliteDriver (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14)[39m[22m
+[1m[31m    at DriverFactory.create (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24)[39m[22m
+[1m[31m    at new DataSource (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/@nestjs/typeorm/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/observable/defer.ts:54:15)[39m[22m
+[1m[31m    at Observable._trySubscribe (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:235:19)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/src/internal/util/errorContext.ts:29:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 12872  - [39m[31m08/17/2026, 6:34:00 PM [31m  ERROR[39m[31m [38;5;3m[ExceptionHandler] [39m[31mDriverPackageNotInstalledError: SQLite package has not been found installed. Please run "npm install sqlite3".[39m[22m
+[1m[31m    at SqliteDriver.loadDependencies [90m(/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:198:19[90m)[39m[31m[39m[22m
+[1m[31m    at new SqliteDriver [90m(/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/sqlite/SqliteDriver.ts:43:14[90m)[39m[31m[39m[22m
+[1m[31m    at DriverFactory.create [90m(/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/driver/DriverFactory.ts:44:24[90m)[39m[31m[39m[22m
+[1m[31m    at new DataSource [90m(/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/typeorm@0.3.31_babel-plugin-macros@3.1.0_sqlite3@5.1.7_supports-color@8.1.1__supports-color@8.1.1/src/data-source/DataSource.ts:150:43[90m)[39m[31m[39m[22m
+[1m[31m    at [90m/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/[4m@nestjs/typeorm[24m/dist/typeorm-core.module.js:170:27[39m[22m
+[1m[31m    at [90m/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/@nestjs+typeorm@11.0.3_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0_29a09c8ea5bfaa4ced7cd9f780fdfd47/node_modules/[4m@nestjs/typeorm[24m/dist/typeorm-core.module.js:174:36[39m[22m
+[1m[31m    at Observable._subscribe [90m(/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/rxjs@7.8.2/node_modules/[4mrxjs[24m/src/internal/observable/defer.ts:54:15[90m)[39m[31m[39m[22m
+[1m[31m    at Observable._trySubscribe [90m(/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/rxjs@7.8.2/node_modules/[4mrxjs[24m/src/internal/Observable.ts:235:19[90m)[39m[31m[39m[22m
+[1m[31m    at [90m/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/rxjs@7.8.2/node_modules/[4mrxjs[24m/src/internal/Observable.ts:225:18[39m[22m
+[1m[31m    at Object.errorContext [90m(/Users/sudheer/workspace/starlink-command-center/[39m[31mnode_modules/[4m.pnpm[24m/rxjs@7.8.2/node_modules/[4mrxjs[24m/src/internal/util/errorContext.ts:29:5[90m)[39m[31m[39m[22m
+[1m[31m[39m[22m
+
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mProcess exited with code 1[39m
+
+Pass --verbose to see the stacktrace.
+

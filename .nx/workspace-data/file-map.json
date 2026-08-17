@@ -1,0 +1,425 @@
+{
+  "version": "6.0",
+  "nxVersion": "21.6.11",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "src/types.d.ts",
+        "hash": "11190512465983180950"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "12856949324116862302"
+      },
+      {
+        "file": "VERIFICATION.md",
+        "hash": "8896883371733049706"
+      },
+      {
+        "file": "package.json",
+        "hash": "8812061833707843965"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "6249643944614785884"
+      },
+      {
+        "file": "reference-dashboard.html",
+        "hash": "8896777631817932166"
+      },
+      {
+        "file": "README.md",
+        "hash": "11083075889279633280"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "16981849884061400995"
+      },
+      {
+        "file": "vitest.config.ts",
+        "hash": "18233243089502884877"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "1454681326945684272"
+      },
+      {
+        "file": "IDEA.md",
+        "hash": "8923039608445595480"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "14129217226657286189"
+      },
+      {
+        "file": ".vscode/launch.json",
+        "hash": "9770977375838165991"
+      },
+      {
+        "file": "nx.json",
+        "hash": "9712265155048022998"
+      },
+      {
+        "file": ".npmrc",
+        "hash": "8136459552884196480"
+      }
+    ],
+    "projectFileMap": {
+      "api": [
+        {
+          "file": "apps/api/.swcrc",
+          "hash": "2960726569740754225"
+        },
+        {
+          "file": "apps/api/project.json",
+          "hash": "3956043305397870908"
+        },
+        {
+          "file": "apps/api/src/accounts/accounts.controller.ts",
+          "hash": "10470208263116688406",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/accounts/accounts.module.ts",
+          "hash": "6341696792452636049",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/accounts/accounts.service.ts",
+          "hash": "14309650283345852018",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/accounts/api-account.entity.ts",
+          "hash": "16680061416440540838",
+          "deps": [
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/analytics/analytics.controller.ts",
+          "hash": "18412828763663967790",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/analytics/analytics.module.ts",
+          "hash": "3744846341337649535",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/app.module.ts",
+          "hash": "2986152722747210247",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/auth/auth.controller.ts",
+          "hash": "1300550289285396485",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/auth/auth.guard.ts",
+          "hash": "6251623722563804075",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "apps/api/src/auth/auth.module.ts",
+          "hash": "5833157514404180581",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt",
+            "npm:@nestjs/typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/auth/auth.service.ts",
+          "hash": "11551046964037248799",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm",
+            "npm:bcrypt",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "apps/api/src/auth/roles.guard.ts",
+          "hash": "17986817164536495972",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/api/src/auth/roles.ts",
+          "hash": "7331410388623648485",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/auth/user.entity.ts",
+          "hash": "17422074117211543839",
+          "deps": [
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/bcrypt.d.ts",
+          "hash": "11174895274363999635"
+        },
+        {
+          "file": "apps/api/src/dashboard/dashboard.controller.ts",
+          "hash": "2115206919392358356",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/dashboard/dashboard.module.ts",
+          "hash": "8191076133820452631",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/main.ts",
+          "hash": "2889213235902461213",
+          "deps": [
+            "npm:reflect-metadata",
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/api/src/seed.service.ts",
+          "hash": "13377029403334952563",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm",
+            "npm:bcrypt"
+          ]
+        },
+        {
+          "file": "apps/api/src/sites/site.entity.ts",
+          "hash": "13590302345624150407",
+          "deps": [
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/sites/sites.controller.ts",
+          "hash": "12708468400702918930",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/sites/sites.module.ts",
+          "hash": "10445216668132131314",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/sites/sites.service.ts",
+          "hash": "16611541209127070094",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/sites/starlink-sync.service.ts",
+          "hash": "2620925067286092197",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/sites/usage-record.entity.ts",
+          "hash": "11585617543046682116",
+          "deps": [
+            "npm:typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/starlink/mapping.ts",
+          "hash": "10428414365142400676"
+        },
+        {
+          "file": "apps/api/src/starlink/starlink.client.ts",
+          "hash": "4853305433706581082",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/api/src/starlink/starlink.module.ts",
+          "hash": "6546379821856975030",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/starlink/starlink.spec.ts",
+          "hash": "3901967761936889340",
+          "deps": [
+            "npm:vitest",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/api/src/starlink/starlink.types.ts",
+          "hash": "1326321716745733594"
+        },
+        {
+          "file": "apps/api/src/starlink/token.service.ts",
+          "hash": "9670154658522685950",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/api/src/users/users.controller.ts",
+          "hash": "7145183675338930408",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/users/users.module.ts",
+          "hash": "5632025072337182828",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm"
+          ]
+        },
+        {
+          "file": "apps/api/src/users/users.service.ts",
+          "hash": "1867399920714880271",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/typeorm",
+            "npm:typeorm",
+            "npm:bcrypt"
+          ]
+        },
+        {
+          "file": "apps/api/tsconfig.json",
+          "hash": "12693510557159889894"
+        }
+      ],
+      "web": [
+        {
+          "file": "apps/web/index.html",
+          "hash": "6496048392747974343"
+        },
+        {
+          "file": "apps/web/package.json",
+          "hash": "16472391776517746675"
+        },
+        {
+          "file": "apps/web/project.json",
+          "hash": "15491347501379184532"
+        },
+        {
+          "file": "apps/web/src/App.tsx",
+          "hash": "7954089985726038137",
+          "deps": [
+            "npm:react",
+            "npm:react-router-dom",
+            "npm:recharts"
+          ]
+        },
+        {
+          "file": "apps/web/src/api/client.spec.ts",
+          "hash": "10307920964577872128",
+          "deps": [
+            "npm:vitest"
+          ]
+        },
+        {
+          "file": "apps/web/src/api/client.ts",
+          "hash": "5616563289225107172",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/web/src/main.tsx",
+          "hash": "9517224721775070474",
+          "deps": [
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-router-dom"
+          ]
+        },
+        {
+          "file": "apps/web/src/styles.css",
+          "hash": "3348869551142636164"
+        },
+        {
+          "file": "apps/web/src/types/react-shim.d.ts",
+          "hash": "6664486729915594733"
+        },
+        {
+          "file": "apps/web/src/vite-env.d.ts",
+          "hash": "9842488604443108444"
+        },
+        {
+          "file": "apps/web/tsconfig.json",
+          "hash": "3116059798684995494"
+        },
+        {
+          "file": "apps/web/vite.config.mjs",
+          "hash": "4517471233263200289",
+          "deps": [
+            "npm:vite",
+            "npm:@vitejs/plugin-react"
+          ]
+        }
+      ]
+    }
+  },
+  "externalNodesHash": "13705821583966731520"
+}

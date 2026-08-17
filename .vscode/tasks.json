@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build API",
+      "type": "shell",
+      "command": "./node_modules/.bin/nx build api",
+      "group": "build",
+      "problemMatcher": ["$eslint-stylish"],
+      "isBackground": false
+    }
+  ]
+}

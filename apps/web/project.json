@@ -1,0 +1,16 @@
+{
+  "name": "web",
+  "sourceRoot": "apps/web/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": { "outputPath": "dist/apps/web" }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "options": { "buildTarget": "web:build", "port": 5173 }
+    },
+    "test": { "executor": "nx:run-commands", "options": { "command": "vitest run --config vitest.config.ts" } }
+  }
+}

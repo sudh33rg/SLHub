@@ -1,0 +1,45 @@
+(node:46242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Compiling with SWC for api...
+
+[4m[34mapps/api/src/sites/starlink-sync.service.ts:128:64[39m[24m - [31m[1merror[22m[39m [90mTS7006[39m: Parameter 'sum' implicitly has an 'any' type.
+
+[0m [90m 126 | [39m    [36mif[39m (daysBack [33m===[39m [35m0[39m) {[0m
+[0m [90m 127 | [39m      [36mconst[39m currentCycle [33m=[39m line[33m.[39mbillingCycles[33m?[39m[33m.[39m[[35m0[39m][33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 128 | [39m      [36mconst[39m cycleUsage [33m=[39m currentCycle[33m?[39m[33m.[39mdailyDataUsage[33m?[39m[33m.[39mreduce((sum[33m,[39m day) [33m=>[39m sum [33m+[39m (day[33m.[39mpriorityGB [33m||[39m [35m0[39m) [33m+[39m (day[33m.[39mstandardGB [33m||[39m [35m0[39m) [33m+[39m (day[33m.[39mnonBillableGB [33m||[39m [35m0[39m)[33m,[39m [35m0[39m)[33m;[39m[0m
+[0m [90m     | [39m                                                               [31m[1m^[22m[39m[0m
+[0m [90m 129 | [39m      site[33m.[39musageGb [33m=[39m [33m+[39m(cycleUsage [33m?[39m[33m?[39m downloadGb)[33m.[39mtoFixed([35m2[39m)[33m;[39m[0m
+[0m [90m 130 | [39m      [36mif[39m (snapshot) {[0m
+[0m [90m 131 | [39m        site[33m.[39mdownloadMbps [33m=[39m snapshot[33m.[39mdownloadMbps[33m;[39m[0m
+
+[4m[34mapps/api/src/sites/starlink-sync.service.ts:128:69[39m[24m - [31m[1merror[22m[39m [90mTS7006[39m: Parameter 'day' implicitly has an 'any' type.
+
+[0m [90m 126 | [39m    [36mif[39m (daysBack [33m===[39m [35m0[39m) {[0m
+[0m [90m 127 | [39m      [36mconst[39m currentCycle [33m=[39m line[33m.[39mbillingCycles[33m?[39m[33m.[39m[[35m0[39m][33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 128 | [39m      [36mconst[39m cycleUsage [33m=[39m currentCycle[33m?[39m[33m.[39mdailyDataUsage[33m?[39m[33m.[39mreduce((sum[33m,[39m day) [33m=>[39m sum [33m+[39m (day[33m.[39mpriorityGB [33m||[39m [35m0[39m) [33m+[39m (day[33m.[39mstandardGB [33m||[39m [35m0[39m) [33m+[39m (day[33m.[39mnonBillableGB [33m||[39m [35m0[39m)[33m,[39m [35m0[39m)[33m;[39m[0m
+[0m [90m     | [39m                                                                    [31m[1m^[22m[39m[0m
+[0m [90m 129 | [39m      site[33m.[39musageGb [33m=[39m [33m+[39m(cycleUsage [33m?[39m[33m?[39m downloadGb)[33m.[39mtoFixed([35m2[39m)[33m;[39m[0m
+[0m [90m 130 | [39m      [36mif[39m (snapshot) {[0m
+[0m [90m 131 | [39m        site[33m.[39mdownloadMbps [33m=[39m snapshot[33m.[39mdownloadMbps[33m;[39m[0m
+
+[4m[34mapps/api/src/starlink/starlink.client.ts:101:14[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'DataUsageServiceLine'.
+
+[0m [90m  99 | [39m    creds[33m:[39m [33mStarlinkCredentials[39m[33m,[39m[0m
+[0m [90m 100 | [39m    body[33m:[39m { serviceLineNumbers[33m?[39m[33m:[39m string[][33m;[39m previousBillingCycles[33m?[39m[33m:[39m number[33m;[39m activeServiceLinesOnly[33m?[39m[33m:[39m boolean[33m;[39m queryStartDate[33m?[39m[33m:[39m string } [33m=[39m {}[33m,[39m[0m
+[0m[31m[1m>[22m[39m[90m 101 | [39m  )[33m:[39m [33mPromise[39m[33m<[39m[33mDataUsageServiceLine[39m[][33m>[39m {[0m
+[0m [90m     | [39m             [31m[1m^[22m[39m[0m
+[0m [90m 102 | [39m    [36mreturn[39m [36mthis[39m[33m.[39mpost[33m<[39m[33mDataUsageServiceLine[39m[][33m>[39m(creds[33m,[39m [32m'/data-usage/query'[39m[33m,[39m {[0m
+[0m [90m 103 | [39m      serviceLineNumbers[33m:[39m body[33m.[39mserviceLineNumbers [33m?[39m[33m?[39m [][33m,[39m[0m
+[0m [90m 104 | [39m      [33m...[39m(body[33m.[39mqueryStartDate [33m?[39m { queryStartDate[33m:[39m body[33m.[39mqueryStartDate } [33m:[39m { previousBillingCycles[33m:[39m body[33m.[39mpreviousBillingCycles [33m?[39m[33m?[39m [35m1[39m })[33m,[39m[0m
+
+[4m[34mapps/api/src/starlink/starlink.client.ts:102:22[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'DataUsageServiceLine'.
+
+[0m [90m 100 | [39m    body[33m:[39m { serviceLineNumbers[33m?[39m[33m:[39m string[][33m;[39m previousBillingCycles[33m?[39m[33m:[39m number[33m;[39m activeServiceLinesOnly[33m?[39m[33m:[39m boolean[33m;[39m queryStartDate[33m?[39m[33m:[39m string } [33m=[39m {}[33m,[39m[0m
+[0m [90m 101 | [39m  )[33m:[39m [33mPromise[39m[33m<[39m[33mDataUsageServiceLine[39m[][33m>[39m {[0m
+[0m[31m[1m>[22m[39m[90m 102 | [39m    [36mreturn[39m [36mthis[39m[33m.[39mpost[33m<[39m[33mDataUsageServiceLine[39m[][33m>[39m(creds[33m,[39m [32m'/data-usage/query'[39m[33m,[39m {[0m
+[0m [90m     | [39m                     [31m[1m^[22m[39m[0m
+[0m [90m 103 | [39m      serviceLineNumbers[33m:[39m body[33m.[39mserviceLineNumbers [33m?[39m[33m?[39m [][33m,[39m[0m
+[0m [90m 104 | [39m      [33m...[39m(body[33m.[39mqueryStartDate [33m?[39m { queryStartDate[33m:[39m body[33m.[39mqueryStartDate } [33m:[39m { previousBillingCycles[33m:[39m body[33m.[39mpreviousBillingCycles [33m?[39m[33m?[39m [35m1[39m })[33m,[39m[0m
+[0m [90m 105 | [39m      activeServiceLinesOnly[33m:[39m body[33m.[39mactiveServiceLinesOnly [33m?[39m[33m?[39m [36mtrue[39m[33m,[39m[0m
+
+Found 4 errors.

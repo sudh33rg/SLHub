@@ -1,0 +1,127 @@
+[4m[34mapps/web/src/App.tsx:294:5[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'load'.
+
+[0m [90m 292 | [39m    await api[33m.[39mpost([32m'/sites'[39m[33m,[39m payload)[33m;[39m[0m
+[0m [90m 293 | [39m    toast([32m`Created site for ${line.serviceLineNumber}${term?.userTerminalId ? ' (with live device)' : ''}`[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 294 | [39m    load()[33m;[39m[0m
+[0m [90m     | [39m    [31m[1m^[22m[39m[0m
+[0m [90m 295 | [39m  }[33m;[39m[0m
+[0m [90m 296 | [39m[0m
+[0m [90m 297 | [39m  [36mconst[39m addAll [33m=[39m async () [33m=>[39m {[0m
+
+[4m[34mapps/web/src/App.tsx:304:4[39m[24m - [31m[1merror[22m[39m [90mTS1128[39m: Declaration or statement expected.
+
+[0m [90m 302 | [39m    [36mconst[39m r [33m=[39m await api[33m.[39mget([32m'/sites'[39m[33m,[39m { params[33m:[39m { q[33m:[39m query } })[33m;[39m[0m
+[0m [90m 303 | [39m    setSites(r[33m.[39mdata)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 304 | [39m  }[33m,[39m [query[33m,[39m reloadKey])[33m;[39m[0m
+[0m [90m     | [39m   [31m[1m^[22m[39m[0m
+[0m [90m 305 | [39m[0m
+[0m [90m 306 | [39m  useEffect(() [33m=>[39m { load()[33m;[39m }[33m,[39m [load])[33m;[39m[0m
+[0m [90m 307 | [39m[0m
+
+[4m[34mapps/web/src/App.tsx:304:7[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'query'.
+
+[0m [90m 302 | [39m    [36mconst[39m r [33m=[39m await api[33m.[39mget([32m'/sites'[39m[33m,[39m { params[33m:[39m { q[33m:[39m query } })[33m;[39m[0m
+[0m [90m 303 | [39m    setSites(r[33m.[39mdata)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 304 | [39m  }[33m,[39m [query[33m,[39m reloadKey])[33m;[39m[0m
+[0m [90m     | [39m      [31m[1m^[22m[39m[0m
+[0m [90m 305 | [39m[0m
+[0m [90m 306 | [39m  useEffect(() [33m=>[39m { load()[33m;[39m }[33m,[39m [load])[33m;[39m[0m
+[0m [90m 307 | [39m[0m
+
+[4m[34mapps/web/src/App.tsx:304:14[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'reloadKey'.
+
+[0m [90m 302 | [39m    [36mconst[39m r [33m=[39m await api[33m.[39mget([32m'/sites'[39m[33m,[39m { params[33m:[39m { q[33m:[39m query } })[33m;[39m[0m
+[0m [90m 303 | [39m    setSites(r[33m.[39mdata)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 304 | [39m  }[33m,[39m [query[33m,[39m reloadKey])[33m;[39m[0m
+[0m [90m     | [39m             [31m[1m^[22m[39m[0m
+[0m [90m 305 | [39m[0m
+[0m [90m 306 | [39m  useEffect(() [33m=>[39m { load()[33m;[39m }[33m,[39m [load])[33m;[39m[0m
+[0m [90m 307 | [39m[0m
+
+[4m[34mapps/web/src/App.tsx:304:24[39m[24m - [31m[1merror[22m[39m [90mTS1005[39m: ';' expected.
+
+[0m [90m 302 | [39m    [36mconst[39m r [33m=[39m await api[33m.[39mget([32m'/sites'[39m[33m,[39m { params[33m:[39m { q[33m:[39m query } })[33m;[39m[0m
+[0m [90m 303 | [39m    setSites(r[33m.[39mdata)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 304 | [39m  }[33m,[39m [query[33m,[39m reloadKey])[33m;[39m[0m
+[0m [90m     | [39m                       [31m[1m^[22m[39m[0m
+[0m [90m 305 | [39m[0m
+[0m [90m 306 | [39m  useEffect(() [33m=>[39m { load()[33m;[39m }[33m,[39m [load])[33m;[39m[0m
+[0m [90m 307 | [39m[0m
+
+[4m[34mapps/web/src/App.tsx:306:21[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'load'.
+
+[0m [90m 304 | [39m  }[33m,[39m [query[33m,[39m reloadKey])[33m;[39m[0m
+[0m [90m 305 | [39m[0m
+[0m[31m[1m>[22m[39m[90m 306 | [39m  useEffect(() [33m=>[39m { load()[33m;[39m }[33m,[39m [load])[33m;[39m[0m
+[0m [90m     | [39m                    [31m[1m^[22m[39m[0m
+[0m [90m 307 | [39m[0m
+[0m [90m 308 | [39m  [36mconst[39m doDelete [33m=[39m async (id[33m:[39m number) [33m=>[39m {[0m
+[0m [90m 309 | [39m    [36mif[39m ([33m![39mconfirm([32m'Delete this site?'[39m)) [36mreturn[39m[33m;[39m[0m
+
+[4m[34mapps/web/src/App.tsx:306:33[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'load'.
+
+[0m [90m 304 | [39m  }[33m,[39m [query[33m,[39m reloadKey])[33m;[39m[0m
+[0m [90m 305 | [39m[0m
+[0m[31m[1m>[22m[39m[90m 306 | [39m  useEffect(() [33m=>[39m { load()[33m;[39m }[33m,[39m [load])[33m;[39m[0m
+[0m [90m     | [39m                                [31m[1m^[22m[39m[0m
+[0m [90m 307 | [39m[0m
+[0m [90m 308 | [39m  [36mconst[39m doDelete [33m=[39m async (id[33m:[39m number) [33m=>[39m {[0m
+[0m [90m 309 | [39m    [36mif[39m ([33m![39mconfirm([32m'Delete this site?'[39m)) [36mreturn[39m[33m;[39m[0m
+
+[4m[34mapps/web/src/App.tsx:312:5[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'load'.
+
+[0m [90m 310 | [39m    await api[33m.[39m[36mdelete[39m([32m`/sites/${id}`[39m)[33m;[39m[0m
+[0m [90m 311 | [39m    toast([32m'Site deleted'[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 312 | [39m    load()[33m;[39m[0m
+[0m [90m     | [39m    [31m[1m^[22m[39m[0m
+[0m [90m 313 | [39m  }[33m;[39m[0m
+[0m [90m 314 | [39m[0m
+[0m [90m 315 | [39m  [36mconst[39m doSync [33m=[39m async (id[33m:[39m number) [33m=>[39m {[0m
+
+[4m[34mapps/web/src/App.tsx:318:5[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'load'.
+
+[0m [90m 316 | [39m    await api[33m.[39mpost([32m`/sites/${id}/sync`[39m)[33m;[39m[0m
+[0m [90m 317 | [39m    toast([32m'Synced live from Starlink V2'[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 318 | [39m    load()[33m;[39m[0m
+[0m [90m     | [39m    [31m[1m^[22m[39m[0m
+[0m [90m 319 | [39m  }[33m;[39m[0m
+[0m [90m 320 | [39m[0m
+[0m [90m 321 | [39m  [36mconst[39m doSyncAll [33m=[39m async () [33m=>[39m {[0m
+
+[4m[34mapps/web/src/App.tsx:337:5[39m[24m - [31m[1merror[22m[39m [90mTS2304[39m: Cannot find name 'load'.
+
+[0m [90m 335 | [39m      toast([32m`Sync failed: ${e?.response?.data?.message || e?.message || 'error'}`[39m)[33m;[39m[0m
+[0m [90m 336 | [39m    }[0m
+[0m[31m[1m>[22m[39m[90m 337 | [39m    load()[33m;[39m[0m
+[0m [90m     | [39m    [31m[1m^[22m[39m[0m
+[0m [90m 338 | [39m  }[33m;[39m[0m
+[0m [90m 339 | [39m[0m
+[0m [90m 340 | [39m  [36mreturn[39m ([0m
+
+[4m[34mapps/web/src/App.tsx:426:1[39m[24m - [31m[1merror[22m[39m [90mTS1128[39m: Declaration or statement expected.
+
+[0m [90m 424 | [39m    [33m<[39m[33m/[39mdiv[33m>[39m[0m
+[0m [90m 425 | [39m  )[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 426 | [39m}[0m
+[0m [90m     | [39m[31m[1m^[22m[39m[0m
+[0m [90m 427 | [39m[0m
+[0m [90m 428 | [39m[36mfunction[39m [33mEditSite[39m({ site[33m,[39m me[33m,[39m onDone }[33m:[39m { site[33m:[39m [33mSite[39m[33m;[39m me[33m:[39m [33mMe[39m[33m;[39m onDone[33m:[39m () [33m=>[39m [36mvoid[39m }) {[0m
+[0m [90m 429 | [39m  [36mconst[39m [accounts[33m,[39m setAccounts] [33m=[39m useState[33m<[39m[33mApiAccount[39m[][33m>[39m([])[33m;[39m[0m
+
+[4m[34mapps/web/src/App.tsx:782:40[39m[24m - [31m[1merror[22m[39m [90mTS2786[39m: 'SitesPage' cannot be used as a JSX component.
+  Its return type 'void' is not a valid JSX element.
+
+[0m [90m 780 | [39m        [33m<[39m[33m/[39mheader[33m>[39m[0m
+[0m [90m 781 | [39m        {page [33m===[39m [32m'Dashboard'[39m [33m&&[39m [33m<[39m[33mDashboard[39m me[33m=[39m{me} reloadKey[33m=[39m{reload} [33m/[39m[33m>[39m}[0m
+[0m[31m[1m>[22m[39m[90m 782 | [39m        {page [33m===[39m [32m'Starlink Sites'[39m [33m&&[39m [33m<[39m[33mSitesPage[39m me[33m=[39m{me} reloadKey[33m=[39m{reload} [33m/[39m[33m>[39m}[0m
+[0m [90m     | [39m                                       [31m[1m^[22m[39m[0m
+[0m [90m 783 | [39m        {page [33m===[39m [32m'Usage & Analytics'[39m [33m&&[39m [33m<[39m[33mAnalyticsPage[39m me[33m=[39m{me} reloadKey[33m=[39m{reload} [33m/[39m[33m>[39m}[0m
+[0m [90m 784 | [39m        {page [33m===[39m [32m'API Accounts'[39m [33m&&[39m [33m<[39m[33mAccountsPage[39m me[33m=[39m{me} reloadKey[33m=[39m{reload} [33m/[39m[33m>[39m}[0m
+[0m [90m 785 | [39m        {page [33m===[39m [32m'Users'[39m [33m&&[39m [33m<[39m[33mUsersPage[39m me[33m=[39m{me} reloadKey[33m=[39m{reload} [33m/[39m[33m>[39m}[0m
+
+Found 12 errors.
+
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mFound type errors. See above.[39m
+
+Pass --verbose to see the stacktrace.
+

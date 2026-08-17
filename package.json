@@ -1,0 +1,45 @@
+{
+  "name": "starlink-command-center",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nx run-many -t serve --projects=api,web --parallel",
+    "build": "nx run-many -t build --projects=api,web --parallel",
+    "serve:api": "nx serve api",
+    "serve:web": "nx serve web",
+    "test": "nx run-many -t test --projects=api,web --parallel",
+    "test:api": "vitest run --config vitest.config.ts",
+    "graph": "nx graph"
+  },
+  "devDependencies": {
+    "@nx/js": "^21.4.1",
+    "@nx/node": "^21.4.1",
+    "@nx/react": "^21.4.1",
+    "@nx/vite": "^21.4.1",
+    "@swc/cli": "^0.8.1",
+    "@swc/core": "latest",
+    "@types/bcrypt": "^6.0.0",
+    "@vitejs/plugin-react": "latest",
+    "nx": "^21.4.1",
+    "typescript": "^5.7.2",
+    "vite": "latest"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/jwt": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "@nestjs/typeorm": "^11.0.0",
+    "axios": "^1.11.0",
+    "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.0",
+    "recharts": "^3.1.2",
+    "reflect-metadata": "^0.2.2",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.27"
+  }
+}

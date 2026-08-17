@@ -1,0 +1,78 @@
+(node:43577) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Compiling with SWC for api...
+
+[1m[31mDebugger listening on ws://localhost:9229/bf39dc29-4257-4082-808c-0e4655c525c7[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [NestFactory] Starting Nest application...
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +8ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] JwtModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] StarlinkModule dependencies initialized +0ms
+[1m[31m(node:43613) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m[39m[22m
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmCoreModule dependencies initialized +7ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] TypeOrmModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] AnalyticsModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] AppModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] DashboardModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] AuthModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] UsersModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] AccountsModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [InstanceLoader] SitesModule dependencies initialized +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RoutesResolver] AuthController {/api/auth}: +5ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/auth/login, POST} route +1ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/auth/me, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/auth/me/password, POST} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RoutesResolver] SitesController {/api/sites}: +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites, GET} route +1ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites/:id, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites, POST} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites/:id, PATCH} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites/:id, DELETE} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites/sync-all, POST} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites/refresh, POST} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites/:id/sync, POST} route +1ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/sites/:id/history, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RoutesResolver] AccountsController {/api/accounts}: +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/accounts, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/accounts, POST} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/accounts/:id, PATCH} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/accounts/:id, DELETE} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/accounts/:id/discover, POST} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RoutesResolver] AnalyticsController {/api/analytics}: +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/analytics/monthly, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/analytics/daily, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/analytics/throughput, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RoutesResolver] DashboardController {/api/dashboard}: +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/dashboard/summary, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RoutesResolver] UsersController {/api/users}: +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/users, GET} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/users, POST} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/users/:id, PATCH} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [RouterExplorer] Mapped {/api/users/:id, DELETE} route +0ms
+[Nest] 43613  - 08/17/2026, 8:32:59 PM     LOG [NestApplication] Nest application successfully started +4ms
+[1m[31m[Nest] 43613  - 08/17/2026, 8:32:59 PM   ERROR [NestApplication] Error: listen EADDRINUSE: address already in use :::3000 +0ms[39m[22m
+[1m[31m[39m[22m
+[1m[31mError: listen EADDRINUSE: address already in use :::3000[39m[22m
+[1m[31m    at Server.setupListenHandle [as _listen2] (node:net:2008:16)[39m[22m
+[1m[31m    at listenInCluster (node:net:2065:12)[39m[22m
+[1m[31m    at Server.listen (node:net:2170:7)[39m[22m
+[1m[31m    at ExpressAdapter.listen (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+platform-express@11.1.29_@nestjs+common@11.1.29_class-transformer@0.5.1_class-v_d6977ce9d6fd2ca4ba2a6776b83fbd51/node_modules/@nestjs/platform-express/adapters/express-adapter.js:115:32)[39m[22m
+[1m[31m    at /Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+core@11.1.29_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0.1_5343752ffb5ef0110cceb21ae613fe18/node_modules/@nestjs/core/nest-application.js:190:30[39m[22m
+[1m[31m    at new Promise (<anonymous>)[39m[22m
+[1m[31m    at NestApplication.listen (/Users/sudheer/workspace/starlink-command-center/node_modules/.pnpm/@nestjs+core@11.1.29_@nestjs+common@11.1.29_class-transformer@0.5.1_class-validator@0.1_5343752ffb5ef0110cceb21ae613fe18/node_modules/@nestjs/core/nest-application.js:180:16)[39m[22m
+[1m[31m    at bootstrap (/Users/sudheer/workspace/starlink-command-center/apps/api/src/main.ts:13:3)[39m[22m
+[1m[31m[39m[22m
+
+[0m[7m[1m[31m NX [39m[22m[27m[0m  [31mProcess exited with code 1[39m
+
+Pass --verbose to see the stacktrace.
+

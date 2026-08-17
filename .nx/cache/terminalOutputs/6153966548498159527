@@ -1,0 +1,46 @@
+(node:46134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Compiling with SWC for api...
+[1m[31mSWC compilation failed[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m(node:46136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m  x Expression expected[39m[22m
+[1m[31m    ,-[src/starlink/starlink.types.ts:80:1][39m[22m
+[1m[31m 77 |     totalCount?: number;[39m[22m
+[1m[31m 78 |     results: DataUsageServiceLine[];[39m[22m
+[1m[31m 79 |   }> {}[39m[22m
+[1m[31m 80 | }[39m[22m
+[1m[31m    : ^[39m[22m
+[1m[31m 81 | [39m[22m
+[1m[31m 82 | export interface UserTerminalCacheData {[39m[22m
+[1m[31m 83 |   userTerminalId?: string;[39m[22m
+[1m[31m    `----[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mCaused by:[39m[22m
+[1m[31m    Syntax Error[39m[22m
+[1m[31mSuccessfully compiled: 33 files with swc (27.87ms)[39m[22m
+[1m[31mFailed to compile 1 file with swc.[39m[22m
+[1m[31mError: Failed to compile:[39m[22m
+[1m[31msrc/starlink/starlink.types.ts[39m[22m
+[1m[31m    at initialCompilation (/Users/sudheer/workspace/starlink-command-center/node_modules/[4m.pnpm[24m/@swc+cli@0.8.1_@swc+core@1.15.47_@swc+helpers@0.5.23_/node_modules/[4m@swc/cli[24m/lib/swc/dir.js:168:23)[39m[22m
+[1m[31m    at async dir (/Users/sudheer/workspace/starlink-command-center/node_modules/[4m.pnpm[24m/@swc+cli@0.8.1_@swc+core@1.15.47_@swc+helpers@0.5.23_/node_modules/[4m@swc/cli[24m/lib/swc/dir.js:288:5)[39m[22m
+[1m[31m[39m[22m

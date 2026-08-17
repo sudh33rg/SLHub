@@ -1,0 +1,1 @@
+A commandcenter for the starlink networs usage which I admin for. I want to monitor the usage, traffic for that. We need a great dashboard with proper KPIs and graphs. I should be able to add new sites/networks with auth provided by star link. I should be able to provide this to other users with RBAC.

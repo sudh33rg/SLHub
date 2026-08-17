@@ -1,0 +1,216 @@
+/* ===================================================================
+   Starlink Central Monitoring — theming system
+   Light is the default; [data-theme="dark"] flips every token.
+   All surfaces (sidebar, main, cards, drawer, modal, login, charts)
+   are driven by these variables so the whole app stays consistent.
+   =================================================================== */
+:root {
+  /* light theme (default) */
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-2: #f7f9fc;
+  --border: #e7ebf2;
+  --border-soft: #eef1f6;
+  --text: #172033;
+  --text-muted: #718096;
+  --primary: #635bff;
+  --primary-hover: #4f46e5;
+  --accent-blue: #2f6bff;
+  --accent-cyan: #0ea5e9;
+  --accent-purple: #9b6cff;
+  --success: #16a34a;
+  --success-bg: #eaf8ef;
+  --success-text: #16a34a;
+  --danger: #ef4444;
+  --danger-bg: #fef0f0;
+  --danger-text: #ef4444;
+  --danger-border: #fecaca;
+  --warning: #f59e0b;
+  --warning-bg: #fff4e0;
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e7ebf2;
+  --sidebar-text: #5b6678;
+  --sidebar-active: #eef0ff;
+  --sidebar-active-text: #4f46e5;
+  --drawer-bg: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #e7ebf2;
+  --input-text: #172033;
+  --shadow: 0 12px 30px #1f29370b;
+  --toast-bg: #111827;
+  --toast-text: #ffffff;
+  --login-bg: radial-gradient(circle at 20% 20%, rgba(99,91,255,.14), transparent 32%), radial-gradient(circle at 80% 80%, rgba(14,165,233,.12), transparent 30%), #eef2f8;
+  --chart-grid: #eef1f6;
+  --chart-axis: #718096;
+}
+
+[data-theme="dark"] {
+  --bg: #07111f;
+  --surface: #0d1a2c;
+  --surface-2: #101f34;
+  --border: #223650;
+  --border-soft: #1b2c43;
+  --text: #eef5ff;
+  --text-muted: #8ea3bf;
+  --primary: #635bff;
+  --primary-hover: #7b74ff;
+  --accent-blue: #3a7bff;
+  --accent-cyan: #0ea5e9;
+  --accent-purple: #9b6cff;
+  --success: #20d48a;
+  --success-bg: #083d2c;
+  --success-text: #3cf0a0;
+  --danger: #ff5964;
+  --danger-bg: #4b1d26;
+  --danger-text: #ff7880;
+  --danger-border: #63323a;
+  --warning: #ffb23e;
+  --warning-bg: #432f12;
+  --sidebar-bg: #0b1424;
+  --sidebar-border: #223650;
+  --sidebar-text: #aeb8ca;
+  --sidebar-active: #1c2638;
+  --sidebar-active-text: #ffffff;
+  --drawer-bg: #0a1626;
+  --input-bg: #0d1b2d;
+  --input-border: #223650;
+  --input-text: #eef5ff;
+  --shadow: 0 12px 30px #00000040;
+  --toast-bg: #0b1424;
+  --toast-text: #eef5ff;
+  --login-bg: radial-gradient(circle at 20% 20%, rgba(99,91,255,.30), transparent 32%), radial-gradient(circle at 80% 80%, rgba(14,165,233,.22), transparent 30%), #07111f;
+  --chart-grid: #182b43;
+  --chart-axis: #8ea3bf;
+}
+
+:root { font-family: Inter, system-ui, sans-serif; color: var(--text); background: var(--bg) }
+* { box-sizing: border-box }
+body { margin: 0; background: var(--bg); color: var(--text); transition: background .2s ease, color .2s ease }
+
+/* ----------------------------- login ----------------------------- */
+.login { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: var(--login-bg); }
+.loginCard { width: min(430px,100%); background: var(--surface); color: var(--text); border-radius: 22px; padding: 34px; box-shadow: var(--shadow) }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 22px; color: var(--text) }
+.logo { width: 44px; height: 44px; border-radius: 13px; background: var(--primary); color: #fff; display: grid; place-items: center; font-size: 22px }
+.loginCard h1 { margin: 30px 0 8px; font-size: 28px; color: var(--text) }
+.loginCard p { color: var(--text-muted); margin: 0 0 24px }
+.loginForm { margin-top: 4px }
+.field { display: block; margin: 15px 0 }
+.field span { display: block; font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 7px }
+.field input { width: 100%; padding: 13px 14px; border: 1px solid var(--input-border); border-radius: 11px; outline: none; font-size: 15px; background: var(--input-bg); color: var(--input-text) }
+.field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,91,255,.1) }
+.error { display: block; color: var(--danger); font-size: 13px; margin: 4px 0 0 }
+.loginBtn { border: 0; border-radius: 11px; padding: 14px 16px; cursor: pointer; font-weight: 700; font-size: 15px; background: var(--primary); color: #fff; width: 100%; margin-top: 18px }
+.loginBtn:hover { background: var(--primary-hover) }
+.demo { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 15px }
+
+/* ----------------------------- shell / sidebar ----------------------------- */
+/* Flex layout: sidebar is a real flex child (never fixed/overlapping), main flexes to fill.
+   This guarantees alignment at every viewport width with no margin math. */
+.shell { min-height: 100vh; display: flex; align-items: stretch }
+.shell aside { width: 245px; flex: 0 0 245px; background: var(--sidebar-bg); border-right: 1px solid var(--sidebar-border); padding: 22px 15px; color: var(--sidebar-text); position: sticky; top: 0; align-self: flex-start; height: 100vh; overflow-y: auto; transition: background .2s ease, border-color .2s ease }
+.sideBrand { font-weight: 800; font-size: 20px; margin-bottom: 4px; color: var(--text); display: flex; align-items: center; gap: 6px }
+.sideBrand .brandStar { color: var(--primary); font-size: 22px; line-height: 1 }
+.sideSub { color: var(--text-muted); font-size: 12px; margin-bottom: 26px; font-weight: 500; letter-spacing: .02em }
+.shell aside button { display: block; width: 100%; text-align: left; background: none; border: 0; color: var(--sidebar-text); padding: 12px; border-radius: 10px; margin: 4px 0; cursor: pointer; font-size: 14px }
+.shell aside button.active, .shell aside button:hover { background: var(--sidebar-active); color: var(--sidebar-active-text) }
+.shell aside .logout { margin-top: 12px; width: 100%; background: var(--surface-2); color: var(--text); border: 1px solid var(--border); padding: 11px; border-radius: 10px; cursor: pointer }
+.system { margin-top: 16px; border: 1px solid var(--border); border-radius: 10px; padding: 13px; background: var(--surface-2); font-size: 13px }
+.sysDot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: middle }
+.sysDot.ok { background: var(--success) }
+.sysDot.warn { background: var(--danger) }
+.sysDot.wait { background: var(--text-muted) }
+.shell main { flex: 1; min-width: 0; padding: 28px 30px; background: var(--bg) }
+
+/* ----------------------------- header ----------------------------- */
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px }
+header h1 { margin: 0; font-size: 25px; color: var(--text) }
+header p { margin: 5px 0 0; color: var(--text-muted); font-size: 13px }
+header button { padding: 10px 14px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 10px; cursor: pointer }
+.top-actions { display: flex; align-items: center; gap: 10px }
+.icon-btn { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 10px; padding: 10px 12px; cursor: pointer }
+.icon-btn:hover { background: var(--surface-2) }
+.theme-toggle { font-size: 15px; line-height: 1 }
+.user { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: var(--text) }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--sidebar-active); color: var(--primary); display: grid; place-items: center; font-weight: 800 }
+
+/* ----------------------------- cards / layout ----------------------------- */
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); color: var(--text) }
+.card h3 { margin: 0 0 18px; font-size: 16px; display: flex; justify-content: space-between; align-items: center; color: var(--text) }
+.cardRight, .muted { color: var(--text-muted); font-weight: 500; font-size: 12px }
+.card span { color: var(--text-muted); font-size: 13px }
+.card strong { display: block; font-size: 26px; margin: 8px 0; font-weight: 800; color: var(--text) }
+.card small { color: var(--text-muted) }
+.okText { color: var(--success) } .badText { color: var(--danger) }
+.grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-top: 0 }
+
+/* ----------------------------- progress ----------------------------- */
+.progress { height: 14px; background: var(--border-soft); border-radius: 20px; overflow: hidden; margin: 10px 0 }
+.progress i { display: block; height: 100%; background: var(--success) }
+
+/* ----------------------------- tables / filters ----------------------------- */
+.tableHead { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px }
+.tableHead h3 { margin: 0 }
+.search, .card input, .card select, .formGrid input, .formGrid select { padding: 10px 12px; border: 1px solid var(--input-border); border-radius: 9px; width: 100%; font-size: 14px; background: var(--input-bg); color: var(--input-text) }
+.search:focus, .card input:focus, .card select:focus, .formGrid input:focus, .formGrid select:focus { outline: none; border-color: var(--primary) }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap }
+.ghost { background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 13px }
+.ghost:hover { background: var(--surface-2) }
+.ghost.danger { color: var(--danger); border-color: var(--danger-border) }
+.primary { background: var(--primary); color: #fff; border: 0; border-radius: 9px; padding: 10px 16px; cursor: pointer; font-weight: 700 }
+.primary:hover { background: var(--primary-hover) }
+.actions { margin-top: 10px; display: flex; gap: 10px }
+.formGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 8px }
+.formGrid label { display: grid; gap: 6px; font-size: 12px; font-weight: 700; color: var(--text-muted) }
+.table-wrap { overflow: auto }
+table { width: 100%; border-collapse: collapse; min-width: 760px }
+th, td { text-align: left; padding: 13px 10px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text) }
+th { color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em }
+.ok, .bad { padding: 5px 9px; border-radius: 20px; font-weight: 700; font-size: 11px }
+.ok { color: var(--success-text); background: var(--success-bg) }
+.bad { color: var(--danger-text); background: var(--danger-bg) }
+.pill2 { display: inline-block; padding: 2px 8px; border-radius: 20px; background: var(--surface-2); color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase }
+.toast { position: fixed; right: 25px; bottom: 25px; background: var(--toast-bg); color: var(--toast-text); border: 1px solid var(--border); padding: 12px 16px; border-radius: 10px; display: none; z-index: 20; box-shadow: var(--shadow) }
+table tbody tr.clickable { cursor: pointer }
+table tbody tr.clickable:hover { background: var(--surface-2) }
+
+/* ----------------------------- charts (recharts theming) ----------------------------- */
+.recharts-cartesian-grid line { stroke: var(--chart-grid) !important; }
+.recharts-text { fill: var(--chart-axis) !important; }
+.recharts-default-tooltip { background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: 8px; color: var(--text) !important; box-shadow: var(--shadow); }
+.recharts-tooltip-item { color: var(--text) !important; }
+.recharts-tooltip-label { color: var(--text-muted) !important; }
+
+@media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, 1fr) } .grid { grid-template-columns: 1fr } }
+@media (max-width: 700px) { .shell aside { width: 70px; flex-basis: 70px } .shell aside span { display: none } .shell main { padding: 18px } .cards { grid-template-columns: 1fr } .formGrid { grid-template-columns: 1fr } }
+
+/* ----------------------------- modal ----------------------------- */
+.modal-backdrop { position: fixed; inset: 0; background: #0b1220cc; display: flex; align-items: center; justify-content: center; z-index: 40; padding: 20px }
+.modal { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 16px; padding: 22px; width: min(720px, 100%); max-height: 86vh; overflow: auto; box-shadow: var(--shadow) }
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px }
+.modal-head h3 { margin: 0; font-size: 18px }
+
+/* ----------------------------- site detail drawer ----------------------------- */
+.siteDrawer { position: fixed; top: 0; right: 0; bottom: 0; width: 430px; max-width: 92vw; background: var(--drawer-bg); border-left: 1px solid var(--border); color: var(--text); padding: 22px 22px 30px; overflow-y: auto; z-index: 50; transform: translateX(100%); transition: transform .25s ease, background .2s ease; box-shadow: -12px 0 40px #000a; pointer-events: none }
+.siteDrawer.open { transform: translateX(0); pointer-events: auto }
+.dClose { position: absolute; top: 14px; right: 16px; background: none; border: 0; color: var(--text-muted); font-size: 26px; line-height: 1; cursor: pointer; opacity: .8 }
+.dClose:hover { opacity: 1; color: var(--text) }
+.dTitle { font-size: 22px; font-weight: 800; margin: 8px 0 4px; color: var(--text); padding-right: 28px }
+.dSub { color: var(--text-muted); font-size: 13px; margin-bottom: 12px }
+.dStatusRow { display: flex; align-items: center; gap: 10px; margin-bottom: 6px }
+.dStatus { padding: 5px 11px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: .03em }
+.dStatus.online { background: var(--success-bg); color: var(--success-text) }
+.dStatus.offline { background: var(--danger-bg); color: var(--danger-text) }
+.dSync { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; border: 1px solid var(--border); padding: 3px 8px; border-radius: 20px }
+.dCard { border: 1px solid var(--border); background: var(--surface); border-radius: 12px; padding: 15px 16px; margin-top: 14px }
+.dCard h4 { margin: 0 0 10px; font-size: 14px; color: var(--text-muted); font-weight: 700 }
+.dRow { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-soft); font-size: 13px }
+.dRow:last-child { border-bottom: 0 }
+.dMuted { color: var(--text-muted) }
+.dValue { color: var(--text); font-weight: 600; text-align: right }
+.dUsageBig { font-size: 26px; font-weight: 800; margin: 6px 0 10px; color: var(--text) }
+.dProgress { height: 8px; background: var(--border-soft); border-radius: 10px; overflow: hidden; margin-bottom: 4px }
+.dProgress > span { display: block; height: 100%; background: var(--success); border-radius: 10px; transition: width .3s ease }
+.dNotice { background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 11px 13px; margin-top: 14px; color: var(--text-muted); font-size: 12.5px; line-height: 1.5 }
+@media (max-width: 700px) { .siteDrawer { width: 100%; max-width: 100% } }

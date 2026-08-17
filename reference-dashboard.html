@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starlink Command Center</title>
+<style>
+:root{
+  --bg:#f4f7fb; --panel:#fff; --text:#172033; --muted:#718096;
+  --line:#e7ebf2; --primary:#635bff; --primary2:#4f46e5;
+  --green:#16a34a; --red:#dc2626; --amber:#d97706;
+  --shadow:0 12px 30px rgba(31,41,55,.07);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}
+.login{min-height:100vh;display:grid;place-items:center;padding:24px;background:
+ radial-gradient(circle at 20% 20%,rgba(99,91,255,.22),transparent 30%),
+ radial-gradient(circle at 80% 80%,rgba(14,165,233,.18),transparent 28%),#0d1322}
+.login-card{width:min(430px,100%);background:#fff;border-radius:22px;padding:34px;box-shadow:0 25px 80px rgba(0,0,0,.25)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:22px}
+.logo{width:44px;height:44px;border-radius:13px;background:#111827;color:#fff;display:grid;place-items:center;font-size:22px}
+.login-card h1{margin:30px 0 8px;font-size:28px}.login-card p{color:var(--muted);margin:0 0 24px}
+.field{margin:15px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}
+.field input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:11px;outline:none}
+.field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,91,255,.1)}
+.btn{border:0;border-radius:11px;padding:12px 16px;cursor:pointer;font-weight:700}
+.btn-primary{background:var(--primary);color:#fff;width:100%;margin-top:8px}.btn-primary:hover{background:var(--primary2)}
+.demo{font-size:12px;color:var(--muted);text-align:center;margin-top:15px}
+.app{display:none;min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:245px;background:#101827;color:#b7c0d1;padding:22px 15px;z-index:5}
+.side-brand{color:#fff;display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;padding:8px 10px 25px}
+.side-logo{width:38px;height:38px;background:#635bff;border-radius:11px;display:grid;place-items:center;color:white}
+.nav{display:grid;gap:6px}.nav button{border:0;background:none;color:#aeb8ca;text-align:left;padding:12px 13px;border-radius:10px;cursor:pointer}.nav button:hover,.nav button.active{background:#1c2638;color:#fff}
+.sidebar-bottom{position:absolute;bottom:20px;left:15px;right:15px}
+.logout{width:100%;background:#182235;color:#dbe3ef;border:0;padding:11px;border-radius:10px;cursor:pointer}
+.main{margin-left:245px;padding:26px 30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.topbar h1{margin:0;font-size:25px}.topbar p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.top-actions{display:flex;align-items:center;gap:10px}.icon-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 12px;cursor:pointer}.user{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700}.avatar{width:36px;height:36px;border-radius:50%;background:#e8e7ff;color:#4f46e5;display:grid;place-items:center}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.metric{display:flex;justify-content:space-between;align-items:flex-start}.metric .label{font-size:13px;color:var(--muted);font-weight:600}.metric .value{font-size:27px;font-weight:800;margin-top:8px}.metric-icon{width:40px;height:40px;border-radius:11px;background:#f0efff;color:var(--primary);display:grid;place-items:center;font-weight:800}
+.delta{font-size:12px;margin-top:10px}.up{color:var(--green)}.warn{color:var(--amber)}
+.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-top:16px}.card h3{margin:0 0 18px;font-size:16px}.chart{height:230px;display:flex;align-items:end;gap:10px;padding:15px 5px 5px;border-bottom:1px solid var(--line)}
+.bar-wrap{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:7px}.bar{width:70%;max-width:42px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#7c74ff,#635bff)}.bar-label{font-size:10px;color:var(--muted)}
+.status-list{display:grid;gap:12px}.status-row{display:flex;align-items:center;justify-content:space-between}.site{display:flex;align-items:center;gap:10px}.site-dot{width:9px;height:9px;border-radius:50%}.online{background:var(--green)}.offline{background:var(--red)}.status{font-size:11px;font-weight:700;padding:5px 8px;border-radius:20px}.status.online-bg{color:var(--green);background:#eaf8ef}.status.offline-bg{color:var(--red);background:#fef0f0}
+.table-card{margin-top:16px}.table-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.search{padding:10px 12px;border:1px solid var(--line);border-radius:9px;outline:none;width:230px}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}td strong{font-size:13px}.pill{padding:5px 9px;border-radius:20px;font-size:11px;font-weight:700}.pill.green{color:var(--green);background:#eaf8ef}.pill.red{color:var(--red);background:#fef0f0}
+.page{display:none}.page.active{display:block}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.form-grid .field input,.form-grid select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}.actions{margin-top:10px;display:flex;gap:10px}.secondary{background:#eef1f6;color:#263044}.primary{background:var(--primary);color:#fff}
+.toast{position:fixed;right:25px;bottom:25px;background:#111827;color:#fff;padding:12px 16px;border-radius:10px;display:none;z-index:20}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+@media(max-width:700px){.sidebar{width:72px}.side-brand span,.nav button span,.sidebar-bottom{display:none}.main{margin-left:72px;padding:20px 14px}.cards{grid-template-columns:1fr}.topbar{align-items:flex-start}.user{display:none}.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="login" id="loginScreen">
+  <div class="login-card">
+    <div class="brand"><div class="logo">✦</div> Starlink Command Center</div>
+    <h1>Welcome back</h1>
+    <p>Sign in to monitor all your Starlink locations from one dashboard.</p>
+    <form id="loginForm">
+      <div class="field"><label>Username</label><input id="username" value="admin" required></div>
+      <div class="field"><label>Password</label><input id="password" type="password" value="admin123" required></div>
+      <button class="btn btn-primary">Sign in</button>
+    </form>
+    <div class="demo">Demo login: admin / admin123</div>
+  </div>
+</section>
+
+<section class="app" id="app">
+  <aside class="sidebar">
+    <div class="side-brand"><div class="side-logo">✦</div><span>Starlink Hub</span></div>
+    <nav class="nav">
+      <button class="active" data-page="dashboard">◈ <span>Dashboard</span></button>
+      <button data-page="sites">⌁ <span>Starlink Sites</span></button>
+      <button data-page="usage">▥ <span>Usage & Analytics</span></button>
+      <button data-page="accounts">◎ <span>API Accounts</span></button>
+      <button data-page="settings">⚙ <span>Settings</span></button>
+    </nav>
+    <div class="sidebar-bottom"><button class="logout" id="logout">Logout</button></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div><h1 id="pageTitle">Dashboard</h1><p>Central monitoring for your Starlink services</p></div>
+      <div class="top-actions"><button class="icon-btn" id="refresh">↻ Refresh</button><div class="user"><div class="avatar">GM</div> Admin</div></div>
+    </div>
+
+    <div class="page active" id="dashboard">
+      <div class="cards">
+        <div class="card metric"><div><div class="label">Total Sites</div><div class="value" id="totalSites">15</div><div class="delta">Configured locations</div></div><div class="metric-icon">⌁</div></div>
+        <div class="card metric"><div><div class="label">Online</div><div class="value" id="onlineSites">12</div><div class="delta up">● Healthy connections</div></div><div class="metric-icon">✓</div></div>
+        <div class="card metric"><div><div class="label">Offline</div><div class="value" id="offlineSites">3</div><div class="delta warn">● Requires attention</div></div><div class="metric-icon">!</div></div>
+        <div class="card metric"><div><div class="label">Data Usage</div><div class="value">2.84 TB</div><div class="delta up">+8.2% this month</div></div><div class="metric-icon">↕</div></div>
+      </div>
+
+      <div class="grid">
+        <div class="card"><h3>Monthly Data Usage</h3><div class="chart" id="chart"></div></div>
+        <div class="card"><h3>Connection Health</h3><div class="status-list">
+          <div class="status-row"><div class="site"><span class="site-dot online"></span>Stable</div><strong>80%</strong></div>
+          <div class="status-row"><div class="site"><span class="site-dot offline"></span>Offline</div><strong>20%</strong></div>
+          <div style="height:12px;background:#eef1f6;border-radius:20px;overflow:hidden"><div style="width:80%;height:100%;background:#16a34a"></div></div>
+          <p style="font-size:12px;color:var(--muted);margin:4px 0 0">API integration can replace demo values with live V2 data.</p>
+        </div></div>
+      </div>
+
+      <div class="card table-card">
+        <div class="table-head"><h3 style="margin:0">Starlink Locations</h3><input class="search" id="search" placeholder="Search location..."></div>
+        <div class="table-wrap"><table><thead><tr><th>Location</th><th>Account</th><th>Plan</th><th>Status</th><th>Usage</th><th>Last Sync</th></tr></thead><tbody id="siteTable"></tbody></table></div>
+      </div>
+    </div>
+
+    <div class="page" id="sites">
+      <div class="card"><h3>Manage Starlink Sites</h3><p style="color:var(--muted)">Add your 10–15 locations here. This demo stores site data in your browser.</p>
+        <form id="siteForm" class="form-grid">
+          <div class="field"><label>Location</label><input id="siteName" placeholder="e.g. WDCL Plant" required></div>
+          <div class="field"><label>Account Name</label><input id="siteAccount" placeholder="e.g. Starlink Account 01" required></div>
+          <div class="field"><label>Plan</label><input id="sitePlan" placeholder="e.g. Local Priority 500GB" required></div>
+          <div class="field"><label>Status</label><select id="siteStatus"><option>Online</option><option>Offline</option></select></div>
+          <div class="actions"><button class="btn primary">Add Site</button></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="page" id="usage">
+      <div class="card"><h3>Usage & Analytics</h3><p style="color:var(--muted)">Connect the Starlink V2 API to replace the sample analytics with live account usage.</p><div class="chart" id="chart2"></div></div>
+    </div>
+
+    <div class="page" id="accounts">
+      <div class="card"><h3>Starlink V2 API Accounts</h3><p style="color:var(--muted)">Keep API credentials on a secure backend in production. Do not expose client secrets in browser JavaScript.</p>
+        <form id="apiForm" class="form-grid">
+          <div class="field"><label>Account / Site</label><input placeholder="WDCL Plant"></div>
+          <div class="field"><label>Service Account ID</label><input placeholder="Enter V2 service account ID"></div>
+          <div class="field"><label>Client ID</label><input placeholder="Enter client ID"></div>
+          <div class="field"><label>Client Secret</label><input type="password" placeholder="Enter client secret"></div>
+          <div class="actions"><button class="btn primary" type="button" id="saveApi">Save Configuration</button></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="page" id="settings">
+      <div class="card"><h3>Dashboard Settings</h3><div class="field"><label>Auto Refresh</label><select style="padding:12px;border:1px solid var(--line);border-radius:10px"><option>Every 5 minutes</option><option>Every 10 minutes</option><option>Every 30 minutes</option></select></div><p style="color:var(--muted);font-size:13px">Single-login UI is included. For real authentication, connect this frontend to your backend authentication service.</p></div>
+    </div>
+  </main>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const defaultSites=[
+["WDCL Plant","Account 01","Local Priority 1TB","Online","320 GB"],
+["DCGL Plant","Account 02","Local Priority 500GB","Online","185 GB"],
+["SDCL Plant","Account 03","Residential","Offline","—"],
+["WACEM Plant","Account 04","Local Priority 500GB","Online","410 GB"],
+["FORTIA Plant","Account 05","Residential","Online","208 GB"],
+["DCT Plant","Account 06","Local Priority 1TB","Online","356 GB"],
+["LEOCEM Plant","Account 07","Local Priority 500GB","Online","290 GB"],
+["Mali Plant","Account 08","Local Priority 500GB","Offline","—"],
+["Guinea Plant","Account 09","Residential","Online","175 GB"],
+["Colony 01","Account 10","Residential","Online","142 GB"],
+["Colony 02","Account 11","Residential","Online","118 GB"],
+["Admin Office","Account 12","Local Priority 500GB","Online","225 GB"],
+["Warehouse","Account 13","Residential","Offline","—"],
+["Remote Site 01","Account 14","Local Priority 500GB","Online","264 GB"],
+["Remote Site 02","Account 15","Residential","Online","146 GB"]
+];
+let sites=JSON.parse(localStorage.getItem("starlinkSites")||"null")||defaultSites;
+const $=id=>document.getElementById(id);
+function toast(msg){$("toast").textContent=msg;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",2200)}
+function renderTable(filter=""){
+ const body=$("siteTable"); body.innerHTML="";
+ sites.filter(s=>s[0].toLowerCase().includes(filter.toLowerCase())).forEach(s=>{
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td><strong>${s[0]}</strong></td><td>${s[1]}</td><td>${s[2]}</td><td><span class="pill ${s[3]=="Online"?"green":"red"}">${s[3]}</span></td><td>${s[4]}</td><td>Just now</td>`;
+  body.appendChild(tr);
+ });
+ const online=sites.filter(s=>s[3]=="Online").length;
+ $("totalSites").textContent=sites.length;$("onlineSites").textContent=online;$("offlineSites").textContent=sites.length-online;
+}
+function makeChart(id){
+ const values=[42,58,48,72,64,83,70,91,78,68,86,74];
+ const c=$(id);c.innerHTML="";
+ values.forEach((v,i)=>{const w=document.createElement("div");w.className="bar-wrap";w.innerHTML=`<div class="bar" style="height:${v}%"></div><div class="bar-label">${["Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"][i]}</div>`;c.appendChild(w)})
+}
+$("loginForm").addEventListener("submit",e=>{e.preventDefault();if($("username").value==="admin"&&$("password").value==="admin123"){sessionStorage.setItem("loggedIn","1");$("loginScreen").style.display="none";$("app").style.display="block"}else toast("Invalid username or password")});
+$("logout").onclick=()=>{sessionStorage.removeItem("loggedIn");location.reload()};
+if(sessionStorage.getItem("loggedIn")){$("loginScreen").style.display="none";$("app").style.display="block"}
+document.querySelectorAll(".nav button").forEach(btn=>btn.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));$(btn.dataset.page).classList.add("active");$("pageTitle").textContent=btn.querySelector("span").textContent});
+$("search").oninput=e=>renderTable(e.target.value);
+$("refresh").onclick=()=>{renderTable($("search").value);toast("Dashboard refreshed")};
+$("siteForm").onsubmit=e=>{e.preventDefault();sites.push([$("siteName").value,$("siteAccount").value,$("sitePlan").value,$("siteStatus").value,"—"]);localStorage.setItem("starlinkSites",JSON.stringify(sites));renderTable();e.target.reset();toast("Site added successfully")};
+$("saveApi").onclick=()=>toast("Configuration saved locally for demo. Use a backend for real API secrets.");
+renderTable();makeChart("chart");makeChart("chart2");
+</script>
+</body>
+</html>

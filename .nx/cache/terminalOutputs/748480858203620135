@@ -1,0 +1,4 @@
+> nx run api:build
+
+Compiling with SWC for api...
+

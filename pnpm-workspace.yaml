@@ -1,0 +1,7 @@
+allowBuilds:
+  '@swc/core': false
+  bcrypt: false
+  esbuild: false
+  nx: false
+  sqlite3: false
+  unrs-resolver: false
