@@ -6,6 +6,7 @@ import { RolesGuard } from '../auth/roles.guard';
 import { SitesService } from '../sites/sites.service';
 import { UsageRecord } from '../sites/usage-record.entity';
 import { Site } from '../sites/site.entity';
+import { trailingWindowStart } from '../starlink/mapping';
 
 @UseGuards(AuthGuard, RolesGuard)
 @Controller('dashboard')
@@ -27,9 +28,9 @@ export class DashboardController {
     const rows = await this.usage.find();
     const ownedIds = new Set(s.map((x: any) => x.id));
     const last30 = rows.filter((r) => {
-      const ageDays = (Date.now() - new Date(r.periodStart).getTime()) / 86400000;
+      const timestamp = new Date(r.periodStart).getTime();
       const site = s.find((x: any) => x.id === r.siteId);
-      return ageDays >= 0 && ageDays <= 30 && ownedIds.has(r.siteId) && (req.user.role === 'admin' || !site?.ownerUsername || site.ownerUsername === req.user.username);
+      return timestamp >= trailingWindowStart(30) && timestamp <= Date.now() && ownedIds.has(r.siteId) && (req.user.role === 'admin' || site?.ownerUsername === req.user.username);
     });
     const monthGb = last30.reduce((a, r) => a + r.downloadGb + r.uploadGb, 0);
 
@@ -39,7 +40,9 @@ export class DashboardController {
       offlineSites: s.length - online,
       usageGb: +usageGb.toFixed(1),
       monthGb: +monthGb.toFixed(1),
-      avgThroughputMbps: +((totalDown / (s.length || 1))).toFixed(1),
+      // Telemetry is already expressed in megabits/second. Keep three decimals
+      // so low-but-real links do not collapse to a misleading 0 Mbps.
+      avgThroughputMbps: +((totalDown / (s.length || 1))).toFixed(3),
       avgLatencyMs: +avgLatency.toFixed(1),
       healthPercent: s.length ? Math.round((online / s.length) * 100) : 0,
     };

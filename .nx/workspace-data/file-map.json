@@ -6,54 +6,6 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "src/types.d.ts",
-        "hash": "11190512465983180950"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "12856949324116862302"
-      },
-      {
-        "file": "VERIFICATION.md",
-        "hash": "8896883371733049706"
-      },
-      {
-        "file": "package.json",
-        "hash": "8812061833707843965"
-      },
-      {
-        "file": "pnpm-lock.yaml",
-        "hash": "6249643944614785884"
-      },
-      {
-        "file": "reference-dashboard.html",
-        "hash": "8896777631817932166"
-      },
-      {
-        "file": "README.md",
-        "hash": "11083075889279633280"
-      },
-      {
-        "file": ".vscode/tasks.json",
-        "hash": "16981849884061400995"
-      },
-      {
-        "file": "vitest.config.ts",
-        "hash": "18233243089502884877"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "1454681326945684272"
-      },
-      {
-        "file": "IDEA.md",
-        "hash": "8923039608445595480"
-      },
-      {
-        "file": "pnpm-workspace.yaml",
-        "hash": "14129217226657286189"
-      },
-      {
         "file": ".vscode/launch.json",
         "hash": "9770977375838165991"
       },
@@ -62,8 +14,72 @@
         "hash": "9712265155048022998"
       },
       {
+        "file": "tmp/apps/api/serve/tsconfig.generated.1617138f-8f4d-4c38-b886-a18c70d219fe.json",
+        "hash": "18203583828519186161"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.1046f824-4c89-48fc-98cd-5442dc8d8ffc.json",
+        "hash": "18203583828519186161"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "16981849884061400995"
+      },
+      {
+        "file": "package.json",
+        "hash": "8812061833707843965"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "1454681326945684272"
+      },
+      {
+        "file": "VERIFICATION.md",
+        "hash": "8896883371733049706"
+      },
+      {
+        "file": "vitest.config.ts",
+        "hash": "18233243089502884877"
+      },
+      {
+        "file": "reference-dashboard.html",
+        "hash": "8896777631817932166"
+      },
+      {
+        "file": "src/types.d.ts",
+        "hash": "11190512465983180950"
+      },
+      {
         "file": ".npmrc",
         "hash": "8136459552884196480"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "14129217226657286189"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.ad62d257-fc71-4fcd-8d07-39b32b6b13ab.json",
+        "hash": "18203583828519186161"
+      },
+      {
+        "file": "tmp/apps/api/serve/tsconfig.generated.25c0d9ce-267c-4700-a9de-6302f08f7707.json",
+        "hash": "18203583828519186161"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "6249643944614785884"
+      },
+      {
+        "file": "IDEA.md",
+        "hash": "8923039608445595480"
+      },
+      {
+        "file": "README.md",
+        "hash": "11083075889279633280"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "12856949324116862302"
       }
     ],
     "projectFileMap": {
@@ -78,7 +94,7 @@
         },
         {
           "file": "apps/api/src/accounts/accounts.controller.ts",
-          "hash": "10470208263116688406",
+          "hash": "13276966227789937669",
           "deps": [
             "npm:@nestjs/common",
             "npm:class-validator"
@@ -110,7 +126,7 @@
         },
         {
           "file": "apps/api/src/analytics/analytics.controller.ts",
-          "hash": "18412828763663967790",
+          "hash": "7441725248555203042",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/typeorm",
@@ -197,7 +213,7 @@
         },
         {
           "file": "apps/api/src/dashboard/dashboard.controller.ts",
-          "hash": "2115206919392358356",
+          "hash": "142949724561883197",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/typeorm",
@@ -233,14 +249,14 @@
         },
         {
           "file": "apps/api/src/sites/site.entity.ts",
-          "hash": "13590302345624150407",
+          "hash": "13321993213530250965",
           "deps": [
             "npm:typeorm"
           ]
         },
         {
           "file": "apps/api/src/sites/sites.controller.ts",
-          "hash": "12708468400702918930",
+          "hash": "9302840604118777905",
           "deps": [
             "npm:@nestjs/common",
             "npm:class-validator"
@@ -256,7 +272,7 @@
         },
         {
           "file": "apps/api/src/sites/sites.service.ts",
-          "hash": "16611541209127070094",
+          "hash": "14167764986413598427",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/typeorm",
@@ -265,7 +281,7 @@
         },
         {
           "file": "apps/api/src/sites/starlink-sync.service.ts",
-          "hash": "2620925067286092197",
+          "hash": "10937838150394551218",
           "deps": [
             "npm:@nestjs/common",
             "npm:@nestjs/typeorm",
@@ -281,11 +297,11 @@
         },
         {
           "file": "apps/api/src/starlink/mapping.ts",
-          "hash": "10428414365142400676"
+          "hash": "6399045711540894246"
         },
         {
           "file": "apps/api/src/starlink/starlink.client.ts",
-          "hash": "4853305433706581082",
+          "hash": "1446524160397236077",
           "deps": [
             "npm:@nestjs/common",
             "npm:axios"
@@ -308,7 +324,7 @@
         },
         {
           "file": "apps/api/src/starlink/starlink.types.ts",
-          "hash": "1326321716745733594"
+          "hash": "8127044641828817053"
         },
         {
           "file": "apps/api/src/starlink/token.service.ts",
@@ -364,7 +380,7 @@
         },
         {
           "file": "apps/web/src/App.tsx",
-          "hash": "7954089985726038137",
+          "hash": "13082876373051422769",
           "deps": [
             "npm:react",
             "npm:react-router-dom",
@@ -380,7 +396,7 @@
         },
         {
           "file": "apps/web/src/api/client.ts",
-          "hash": "5616563289225107172",
+          "hash": "3135471434673387387",
           "deps": [
             "npm:axios"
           ]
@@ -396,7 +412,7 @@
         },
         {
           "file": "apps/web/src/styles.css",
-          "hash": "3348869551142636164"
+          "hash": "3247313811037860810"
         },
         {
           "file": "apps/web/src/types/react-shim.d.ts",

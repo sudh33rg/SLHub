@@ -76,7 +76,19 @@ export class StarlinkSyncService {
 
     // 2) Telemetry snapshot (best-effort; a miss here is not fatal for usage, but we
     //    still surface it as a warning on the site rather than faking numbers).
-    let snapshot: { downloadMbps: number; uploadMbps: number; latencyMs: number } | undefined;
+    let snapshot: {
+      downloadMbps: number;
+      uploadMbps: number;
+      latencyMs: number;
+      terminalState?: string;
+      softwareVersion?: string;
+      uptimeSeconds?: number;
+      obstructionPercent?: number;
+      popPingDropRate?: number;
+      signalQuality?: number;
+      alertCount?: number;
+    } | undefined;
+    let telemetryAvailable = false;
     let telemetryError: string | undefined;
     try {
       let deviceId = site.deviceId;
@@ -86,7 +98,13 @@ export class StarlinkSyncService {
       }
       if (deviceId) {
         const telemetry = await this.starlink.queryTelemetry(creds, { userTerminalIds: [deviceId] });
-        snapshot = mapTelemetrySnapshot(telemetry.userTerminals?.[deviceId]);
+        const rawTelemetry = telemetry.userTerminals?.[deviceId];
+        if (rawTelemetry) {
+          snapshot = mapTelemetrySnapshot(rawTelemetry);
+          telemetryAvailable = true;
+        } else {
+          telemetryError = `No telemetry record returned for terminal ${deviceId}.`;
+        }
         if (!site.deviceId) site.deviceId = deviceId;
       } else {
         telemetryError = 'No user terminal is linked to this service line — throughput/latency unavailable.';
@@ -115,6 +133,31 @@ export class StarlinkSyncService {
     }
     if (days.length === 0) throw new Error('Starlink returned no daily usage data for this service line');
 
+    // The billing window is owned by Starlink. Never ask operators to key this
+    // in manually when the data-usage response already provides the live cycle.
+    const now = Date.now();
+    const cycle = line.billingCycles?.find((c) => {
+      const start = new Date(c.startDate).getTime();
+      const end = new Date(c.endDate).getTime();
+      return start <= now && now <= end;
+    }) ?? line.billingCycles?.[line.billingCycles.length - 1];
+    if (cycle) {
+      site.billingCycleStart = cycle.startDate.slice(0, 10);
+      site.billingCycleEnd = cycle.endDate.slice(0, 10);
+      site.billingCycle = site.billingCycleStart;
+    }
+    const livePlanName = (line.servicePlan as any)?.name;
+    if (livePlanName) site.plan = livePlanName;
+    if (line.servicePlan?.usageLimitGB !== undefined) site.dataLimitGb = line.servicePlan.usageLimitGB;
+    const lineData = line as any;
+    const overage = lineData.isOptedIntoOverage ?? line.servicePlan?.isOptedIntoOverage ?? lineData.automaticTopUp;
+    if (overage !== undefined) site.autoTopup = Boolean(overage);
+    if (lineData.publicIpEnabled !== undefined) site.ipPolicy = lineData.publicIpEnabled ? 'Public IP' : 'Carrier-Grade NAT';
+    if (line.active !== undefined || line.state !== undefined) {
+      const state = String(line.state ?? '').toLowerCase();
+      site.subscriptionStatus = line.active === false || ['cancelled', 'inactive', 'suspended', 'terminated'].includes(state) ? 'Paused' : 'Active';
+    }
+
     // Update the site's live snapshot from the most recent day + telemetry.
     const latest = days[days.length - 1];
     // `usageGb` is the trailing-30-day total drawn from the SAME persisted records
@@ -125,6 +168,23 @@ export class StarlinkSyncService {
       site.downloadMbps = snapshot.downloadMbps;
       site.uploadMbps = snapshot.uploadMbps;
       site.latencyMs = snapshot.latencyMs;
+      site.terminalState = snapshot.terminalState;
+      site.softwareVersion = snapshot.softwareVersion;
+      site.uptimeSeconds = snapshot.uptimeSeconds;
+      site.obstructionPercent = snapshot.obstructionPercent;
+      site.popPingDropRate = snapshot.popPingDropRate;
+      site.signalQuality = snapshot.signalQuality;
+      site.alertCount = snapshot.alertCount;
+      if (telemetryAvailable) {
+        const state = String(snapshot.terminalState ?? '').toLowerCase();
+        site.status = ['offline', 'inactive', 'suspended', 'no_signal'].includes(state) ? 'Offline' : 'Online';
+      }
+      if (lastSaved) {
+        lastSaved.avgDownloadMbps = snapshot.downloadMbps;
+        lastSaved.avgUploadMbps = snapshot.uploadMbps;
+        lastSaved.avgLatencyMs = snapshot.latencyMs;
+        await this.usage.save(lastSaved);
+      }
     }
     site.lastSyncAt = new Date();
     site.lastSyncMode = 'live';

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api, fmtGb, fmtDate, initial, getSites, Me, Site, ApiAccount } from './api/client';
+import { api, fmtGb, fmtMbps, fmtCycle, fmtDate, initial, getSites, Me, Site, ApiAccount, ApiAccountOverview } from './api/client';
 import {
   ResponsiveContainer, BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, PieChart, Pie, Cell, AreaChart, Area,
 } from 'recharts';
@@ -8,8 +8,8 @@ import {
 /* ----------------------------- auth ----------------------------- */
 function Login({ onAuth }: { onAuth: (m: Me) => void }) {
   const nav = useNavigate();
-  const [u, setU] = useState('');
-  const [p, setP] = useState('');
+  const [u, setU] = useState('admin');
+  const [p, setP] = useState('admin123');
   const [e, setE] = useState('');
   const submit = async (ev?: any) => {
     ev?.preventDefault();
@@ -26,13 +26,13 @@ function Login({ onAuth }: { onAuth: (m: Me) => void }) {
   return (
     <div className="login">
       <div className="loginCard">
-        <div className="brand"><b>✦</b> Starlink Command Center</div>
+        <div className="brand"><div className="logo">✦</div> Starlink Command Center</div>
         <h1>Welcome back</h1>
-        <p>Sign in to monitor all your Starlink locations.</p>
+        <p>Sign in to monitor all your Starlink locations from one dashboard.</p>
         <form onSubmit={submit} className="loginForm">
           <label className="field">
             <span>Username</span>
-            <input value={u} onChange={(x) => setU(x.target.value)} placeholder="Username" autoComplete="username" autoFocus />
+            <input value={u} onChange={(x) => setU(x.target.value)} placeholder="Username" autoComplete="username" />
           </label>
           <label className="field">
             <span>Password</span>
@@ -41,6 +41,7 @@ function Login({ onAuth }: { onAuth: (m: Me) => void }) {
           {e && <small className="error">{e}</small>}
           <button type="submit" className="loginBtn">Login</button>
         </form>
+        <div className="demo">Demo login: admin / admin123</div>
       </div>
     </div>
   );
@@ -67,26 +68,29 @@ function toast(msg: string) {
 }
 
 /* ----------------------------- system status (real) ----------------------------- */
-function SystemStatus() {
+function SystemStatus({ reloadKey }: { reloadKey: number }) {
   const [sites, setSites] = useState<Site[] | null>(null);
   useEffect(() => {
     let alive = true;
     getSites().then((s) => alive && setSites(s)).catch(() => alive && setSites([]));
     return () => { alive = false; };
-  }, []);
+  }, [reloadKey]);
   const total = sites?.length ?? 0;
   const online = sites?.filter((s) => s.status?.toLowerCase() === 'online').length ?? 0;
   const offline = total - online;
   const allOnline = total > 0 && offline === 0;
-  const dot = !sites ? 'wait' : allOnline ? 'ok' : offline > 0 ? 'warn' : 'ok';
-  const label = !sites ? 'Checking systems…' : allOnline ? 'All systems operational' : `${offline} site(s) require attention`;
+  const linked = sites?.filter((s) => s.lastSyncMode === 'live') ?? [];
+  const newestSync = linked.reduce((latest, s) => Math.max(latest, s.lastSyncAt ? new Date(s.lastSyncAt).getTime() : 0), 0);
+  const stale = linked.length > 0 && (!newestSync || Date.now() - newestSync > 3 * 60 * 1000);
+  const dot = !sites ? 'wait' : offline > 0 || stale ? 'warn' : allOnline ? 'ok' : 'ok';
+  const label = !sites ? 'Checking live systems…' : offline > 0 ? `${offline} site(s) require attention` : stale ? 'Live data is stale' : allOnline ? 'All systems operational' : 'No linked live sites';
   return (
     <div className="system">
       <span className={`sysDot ${dot}`} />
       <b>System Status</b>
       <div className="muted" style={{ marginTop: 4 }}>
         {label}
-        {sites && <><br />{online} online · {offline} offline · {total} total</>}
+        {sites && <><br />{online} online · {offline} offline · {total} total<br /><small>{newestSync ? `Last live poll ${fmtDate(new Date(newestSync).toISOString())}` : 'No live poll recorded'}</small></>}
       </div>
     </div>
   );
@@ -157,7 +161,7 @@ function SiteDrawer({ site, onClose }: { site: Site | null; onClose: () => void 
             <DrawerRow label="Account" value={site.accountName} />
             <DrawerRow label="Plan" value={site.plan} />
             <DrawerRow label="IP Policy" value={site.ipPolicy || 'Public IP'} />
-            <DrawerRow label="Billing Cycle" value={site.billingCycle ? new Date(site.billingCycle).toLocaleDateString() : '—'} />
+            <DrawerRow label="Billing Cycle" value={fmtCycle(site.billingCycleStart, site.billingCycleEnd)} />
           </div>
 
           <div className="dCard">
@@ -186,9 +190,19 @@ function SiteDrawer({ site, onClose }: { site: Site | null; onClose: () => void 
             <DrawerRow label="Automatic Top-up" value={site.autoTopup ? 'Enabled' : 'Disabled'} />
           </div>
 
+          <div className="dCard">
+            <h4>Live Terminal Telemetry</h4>
+            <DrawerRow label="Throughput" value={`${fmtMbps(site.downloadMbps)} / ${fmtMbps(site.uploadMbps)}`} />
+            <DrawerRow label="Latency" value={`${site.latencyMs.toFixed(1)} ms`} />
+            <DrawerRow label="Obstruction" value={site.obstructionPercent != null ? `${site.obstructionPercent.toFixed(2)}%` : '—'} />
+            <DrawerRow label="PoP packet loss" value={site.popPingDropRate != null ? `${site.popPingDropRate.toFixed(3)}%` : '—'} />
+            <DrawerRow label="Alerts" value={site.alertCount != null ? String(site.alertCount) : '—'} accent={site.alertCount ? 'var(--danger-text)' : undefined} />
+            <DrawerRow label="Software" value={site.softwareVersion || '—'} />
+          </div>
+
           <div className="dNotice">
             {site.lastSyncMode === 'live'
-              ? 'Live monitoring data pulled from the Starlink V2 API.'
+              ? `Live snapshot from Starlink V2 data-usage/query + telemetry/query. Last poll: ${fmtDate(site.lastSyncAt)}. The dashboard polls every 60 seconds; it is near-real-time, not a streaming socket.`
               : 'No live link — usage is the latest recorded value. Link a Starlink V2 API account + service line to enable live monitoring.'}
           </div>
         </>
@@ -203,16 +217,18 @@ function Dashboard({ me, reloadKey }: { me: Me; reloadKey: number }) {
   const [monthly, setMonthly] = useState<any[]>([]);
   const [sites, setSites] = useState<Site[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [selected, setSelected] = useState<Site | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [d, m, s] = await Promise.all([
-      api.get('/dashboard/summary'),
-      api.get('/analytics/monthly'),
-      api.get('/sites'),
-    ]);
-    setSummary(d.data); setMonthly(m.data); setSites(s.data); setLoading(false);
+    setError('');
+    try {
+      const [d, m, s] = await Promise.all([api.get('/dashboard/summary'), api.get('/analytics/monthly'), api.get('/sites')]);
+      setSummary(d.data); setMonthly(m.data); setSites(s.data);
+    } catch (e: any) {
+      setError(e?.response?.data?.message || 'Could not load the live dashboard data.');
+    } finally { setLoading(false); }
   }, [reloadKey]);
 
   useEffect(() => { load(); }, [load]);
@@ -235,24 +251,23 @@ function Dashboard({ me, reloadKey }: { me: Me; reloadKey: number }) {
         <Card><span>Online</span><strong className="okText">{summary.onlineSites ?? '—'}</strong><small>Healthy connections</small></Card>
         <Card><span>Offline</span><strong className="badText">{summary.offlineSites ?? '—'}</strong><small>Requires attention</small></Card>
         <Card><span>Total Usage</span><strong>{summary.usageGb != null ? fmtGb(summary.usageGb) : '—'}</strong><small>Current configured usage</small></Card>
-        <Card><span>Last 30d Traffic</span><strong>{summary.monthGb != null ? fmtGb(summary.monthGb) : '—'}</strong><small>Across all sites</small></Card>
-        <Card><span>Avg Throughput</span><strong>{summary.avgThroughputMbps != null ? `${summary.avgThroughputMbps} Mbps` : '—'}</strong><small>Download (online)</small></Card>
+        <Card><span>Last 30d Starlink Usage</span><strong>{summary.monthGb != null ? fmtGb(summary.monthGb) : '—'}</strong><small>Reported by Starlink</small></Card>
+        <Card><span>Avg Throughput</span><strong>{summary.avgThroughputMbps != null ? fmtMbps(summary.avgThroughputMbps) : '—'}</strong><small>Live download (Mbps)</small></Card>
         <Card><span>Avg Latency</span><strong>{summary.avgLatencyMs != null ? `${summary.avgLatencyMs} ms` : '—'}</strong><small>Round-trip</small></Card>
         <Card><span>Health</span><strong>{summary.healthPercent ?? '—'}%</strong><small>Connection uptime</small></Card>
       </div>
 
-      {loading ? <div className="card">Loading…</div> : (
+      {loading ? <div className="card loadingState">Loading live Starlink data…</div> : error ? <div className="card errorState"><b>Dashboard unavailable</b><p>{error}</p><button className="ghost" onClick={load}>Try again</button></div> : (
         <>
           <div className="grid">
-            <Card title="Monthly Data Usage (download + upload)">
+            <Card title="Monthly Data Usage (Starlink reported)">
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={monthly}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#eef1f6" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                   <XAxis dataKey="period" tick={{ fontSize: 11 }} />
                   <YAxis tick={{ fontSize: 11 }} />
                   <Tooltip formatter={(v: any) => `${v} GB`} />
-                  <Bar dataKey="downloadGb" name="Download" stackId="a" fill="#635bff" radius={[3, 3, 0, 0]} />
-                  <Bar dataKey="uploadGb" name="Upload" stackId="a" fill="#0ea5e9" radius={[3, 3, 0, 0]} />
+                  <Bar dataKey="downloadGb" name="Reported usage" fill="#635bff" radius={[3, 3, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </Card>
@@ -277,10 +292,10 @@ function Dashboard({ me, reloadKey }: { me: Me; reloadKey: number }) {
                   <defs>
                     <linearGradient id="dd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#635bff" stopOpacity={0.5} /><stop offset="100%" stopColor="#635bff" stopOpacity={0} /></linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#eef1f6" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                   <XAxis dataKey="period" tick={{ fontSize: 11 }} />
                   <YAxis tick={{ fontSize: 11 }} />
-                  <Tooltip />
+                  <Tooltip formatter={(v: any) => fmtMbps(Number(v))} />
                   <Area type="monotone" dataKey="avgDownloadMbps" name="Download" stroke="#635bff" fill="url(#dd)" />
                   <Area type="monotone" dataKey="avgUploadMbps" name="Upload" stroke="#0ea5e9" fillOpacity={0} />
                 </AreaChart>
@@ -325,7 +340,7 @@ function SiteTable({ sites, compact, onSelect }: { sites: Site[]; compact?: bool
   return (
     <div className="table-wrap">
       <table>
-        <thead><tr><th>Location</th><th>Account</th><th>Plan</th><th>Status</th><th>Usage</th><th>↓ / ↑ Mbps</th><th>Latency</th>{!compact && <th>Owner</th>}<th>Last Sync</th></tr></thead>
+        <thead><tr><th>Location</th><th>Account</th><th>Plan</th><th>Status</th><th>Usage</th><th>↓ / ↑ Mbps</th><th>Latency</th>{!compact && <th>Owner</th>}<th>Last Live Poll</th></tr></thead>
         <tbody>
           {sites.map((s) => (
             <tr key={s.id} className={onSelect ? 'clickable' : ''} onClick={onSelect ? () => onSelect(s) : undefined}>
@@ -334,7 +349,7 @@ function SiteTable({ sites, compact, onSelect }: { sites: Site[]; compact?: bool
               <td>{s.plan}</td>
               <td><StatusPill s={s.status} /></td>
               <td>{s.status === 'Offline' ? '—' : fmtGb(s.usageGb)}</td>
-              <td>{s.status === 'Offline' ? '—' : `${s.downloadMbps}/${s.uploadMbps}`}</td>
+              <td>{s.status === 'Offline' ? '—' : `${fmtMbps(s.downloadMbps)} / ${fmtMbps(s.uploadMbps)}`}</td>
               <td>{s.status === 'Offline' ? '—' : `${s.latencyMs} ms`}</td>
               {!compact && <td>{s.ownerUsername || <em>all</em>}</td>}
               <td>{fmtDate(s.lastSyncAt)}</td>
@@ -349,11 +364,12 @@ function SiteTable({ sites, compact, onSelect }: { sites: Site[]; compact?: bool
 
 function SiteForm({ me, onDone }: { me: Me; onDone: () => void }) {
   const [accounts, setAccounts] = useState<ApiAccount[]>([]);
-  const [form, setForm] = useState({ name: '', accountName: '', plan: '', status: 'Online', usageGb: 0, dataLimitGb: '', ipPolicy: 'Public IP', billingCycle: '', autoTopup: false, subscriptionStatus: 'Active', notes: '', ownerUsername: '', apiAccountId: '', serviceLineNumber: '', deviceId: '' });
+  const [form, setForm] = useState({ name: '', accountName: '', plan: '', status: 'Online', usageGb: 0, dataLimitGb: '', ipPolicy: 'Public IP', autoTopup: false, subscriptionStatus: 'Active', notes: '', ownerUsername: '', apiAccountId: '', serviceLineNumber: '', deviceId: '' });
   useEffect(() => { api.get('/accounts').then((r) => setAccounts(r.data)).catch(() => setAccounts([])); }, []);
   const submit = async (e: any) => {
     e.preventDefault();
-    const payload: any = { ...form, usageGb: +form.usageGb };
+    const payload: any = { ...form };
+    delete payload.usageGb;
     if (form.dataLimitGb) payload.dataLimitGb = +form.dataLimitGb;
     if (form.apiAccountId) payload.apiAccountId = +form.apiAccountId;
     await api.post('/sites', payload);
@@ -367,13 +383,12 @@ function SiteForm({ me, onDone }: { me: Me; onDone: () => void }) {
       <label>Plan<input required value={form.plan} onChange={(e) => setForm({ ...form, plan: e.target.value })} placeholder="e.g. Local Priority 500GB" /></label>
       <label>Data Limit (GB)<input type="number" value={form.dataLimitGb} onChange={(e) => setForm({ ...form, dataLimitGb: e.target.value })} placeholder="e.g. 500 (blank = unlimited)" /></label>
       <label>IP Policy<select value={form.ipPolicy} onChange={(e) => setForm({ ...form, ipPolicy: e.target.value })}><option>Public IP</option><option>Carrier-Grade NAT</option></select></label>
-      <label>Billing Cycle<input type="date" value={form.billingCycle} onChange={(e) => setForm({ ...form, billingCycle: e.target.value })} /></label>
+      <label className="fieldHint">Billing Cycle<span>Populated from Starlink after linking a service line.</span></label>
       <label>Subscription<select value={form.subscriptionStatus} onChange={(e) => setForm({ ...form, subscriptionStatus: e.target.value })}><option>Active</option><option>Paused</option><option>Cancelled</option></select></label>
       <label>Status<select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })}><option>Online</option><option>Offline</option></select></label>
-      <label>Initial Usage (GB)<input type="number" value={form.usageGb} onChange={(e) => setForm({ ...form, usageGb: +e.target.value })} /></label>
       <label>Starlink API Account
         <select value={form.apiAccountId} onChange={(e) => setForm({ ...form, apiAccountId: e.target.value })}>
-          <option value="">— none (simulated) —</option>
+          <option value="">— not linked yet —</option>
           {accounts.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}
         </select>
       </label>
@@ -571,13 +586,18 @@ function SitesPage({ me, reloadKey }: { me: Me; reloadKey: number }) {
 
 function EditSite({ site, me, onDone }: { site: Site; me: Me; onDone: () => void }) {
   const [accounts, setAccounts] = useState<ApiAccount[]>([]);
-  const [f, setF] = useState({ ...site, ownerUsername: undefined as string | undefined, apiAccountId: site.apiAccountId ? String(site.apiAccountId) : '', serviceLineNumber: site.serviceLineNumber || '', deviceId: site.deviceId || '', dataLimitGb: site.dataLimitGb ?? '', ipPolicy: site.ipPolicy || 'Public IP', billingCycle: site.billingCycle || '', autoTopup: !!site.autoTopup, subscriptionStatus: site.subscriptionStatus || 'Active' });
+  const [f, setF] = useState({ ...site, ownerUsername: undefined as string | undefined, apiAccountId: site.apiAccountId ? String(site.apiAccountId) : '', serviceLineNumber: site.serviceLineNumber || '', deviceId: site.deviceId || '', dataLimitGb: site.dataLimitGb ?? '', ipPolicy: site.ipPolicy || 'Public IP', autoTopup: !!site.autoTopup, subscriptionStatus: site.subscriptionStatus || 'Active' });
   useEffect(() => { api.get('/accounts').then((r) => setAccounts(r.data)).catch(() => setAccounts([])); }, []);
   const submit = async (e: any) => {
     e.preventDefault();
     const { id, createdAt, updatedAt, lastSyncAt, ...rest } = f as any;
     const payload: any = { ...rest };
     delete payload.lastSyncMode; delete payload.lastError;
+    delete payload.billingCycle; delete payload.billingCycleStart; delete payload.billingCycleEnd;
+    delete payload.terminalState; delete payload.softwareVersion; delete payload.uptimeSeconds;
+    delete payload.obstructionPercent; delete payload.popPingDropRate; delete payload.signalQuality; delete payload.alertCount;
+    // Live metrics must only come from Starlink, never from an edit form.
+    delete payload.usageGb; delete payload.downloadMbps; delete payload.uploadMbps; delete payload.latencyMs;
     if (payload.apiAccountId) payload.apiAccountId = +payload.apiAccountId; else delete payload.apiAccountId;
     if (payload.dataLimitGb) payload.dataLimitGb = +payload.dataLimitGb; else delete payload.dataLimitGb;
     await api.patch(`/sites/${site.id}`, payload);
@@ -591,17 +611,13 @@ function EditSite({ site, me, onDone }: { site: Site; me: Me; onDone: () => void
       <label>Plan<input value={f.plan} onChange={(e) => setF({ ...f, plan: e.target.value })} /></label>
       <label>Data Limit (GB)<input type="number" value={f.dataLimitGb} onChange={(e) => setF({ ...f, dataLimitGb: e.target.value })} placeholder="blank = unlimited" /></label>
       <label>IP Policy<select value={f.ipPolicy} onChange={(e) => setF({ ...f, ipPolicy: e.target.value })}><option>Public IP</option><option>Carrier-Grade NAT</option></select></label>
-      <label>Billing Cycle<input type="date" value={f.billingCycle} onChange={(e) => setF({ ...f, billingCycle: e.target.value })} /></label>
+      <label className="fieldHint">Billing Cycle<span>{fmtCycle(site.billingCycleStart, site.billingCycleEnd)} · live from Starlink</span></label>
       <label>Subscription<select value={f.subscriptionStatus} onChange={(e) => setF({ ...f, subscriptionStatus: e.target.value })}><option>Active</option><option>Paused</option><option>Cancelled</option></select></label>
       <label>Auto Top-up<input type="checkbox" checked={f.autoTopup} onChange={(e) => setF({ ...f, autoTopup: e.target.checked })} /></label>
       <label>Status<select value={f.status} onChange={(e) => setF({ ...f, status: e.target.value })}><option>Online</option><option>Offline</option></select></label>
-      <label>Usage GB<input type="number" value={f.usageGb} onChange={(e) => setF({ ...f, usageGb: +e.target.value })} /></label>
-      <label>Download Mbps<input type="number" value={f.downloadMbps} onChange={(e) => setF({ ...f, downloadMbps: +e.target.value })} /></label>
-      <label>Upload Mbps<input type="number" value={f.uploadMbps} onChange={(e) => setF({ ...f, uploadMbps: +e.target.value })} /></label>
-      <label>Latency ms<input type="number" value={f.latencyMs} onChange={(e) => setF({ ...f, latencyMs: +e.target.value })} /></label>
       <label>Starlink API Account
         <select value={f.apiAccountId} onChange={(e) => setF({ ...f, apiAccountId: e.target.value })}>
-          <option value="">— none (simulated) —</option>
+          <option value="">— not linked yet —</option>
           {accounts.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}
         </select>
       </label>
@@ -645,30 +661,29 @@ function AnalyticsPage({ me, reloadKey }: { me: Me; reloadKey: number }) {
         </select>
       </div>
       <div className="cards">
-        <Card><span>Period Traffic</span><strong>{fmtGb(totalTraffic)}</strong><small>Last 30 days</small></Card>
-        <Card><span>Avg Download</span><strong>{throughput.length ? (throughput.reduce((a, r) => a + r.avgDownloadMbps, 0) / throughput.length).toFixed(1) : '—'} Mbps</strong><small>30-day mean</small></Card>
-        <Card><span>Avg Upload</span><strong>{throughput.length ? (throughput.reduce((a, r) => a + r.avgUploadMbps, 0) / throughput.length).toFixed(1) : '—'} Mbps</strong><small>30-day mean</small></Card>
+        <Card><span>Period Starlink Usage</span><strong>{fmtGb(totalTraffic)}</strong><small>Last 30 days · reported</small></Card>
+        <Card><span>Avg Download</span><strong>{throughput.length ? fmtMbps(throughput.reduce((a, r) => a + r.avgDownloadMbps, 0) / throughput.length) : '—'}</strong><small>30-day mean · Mbps</small></Card>
+        <Card><span>Avg Upload</span><strong>{throughput.length ? fmtMbps(throughput.reduce((a, r) => a + r.avgUploadMbps, 0) / throughput.length) : '—'}</strong><small>30-day mean · Mbps</small></Card>
         <Card><span>Avg Latency</span><strong>{throughput.length ? (throughput.reduce((a, r) => a + r.avgLatencyMs, 0) / throughput.length).toFixed(1) : '—'} ms</strong><small>30-day mean</small></Card>
       </div>
-      <Card title="Daily Traffic (last 30 days)">
+      <Card title="Daily Starlink Data Usage (last 30 days)">
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={daily}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#eef1f6" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
             <XAxis dataKey="period" tick={{ fontSize: 10 }} interval={2} />
             <YAxis tick={{ fontSize: 11 }} />
             <Tooltip formatter={(v: any) => `${v} GB`} />
-            <Bar dataKey="downloadGb" name="Download" fill="#635bff" radius={[2, 2, 0, 0]} />
-            <Bar dataKey="uploadGb" name="Upload" fill="#0ea5e9" radius={[2, 2, 0, 0]} />
+            <Bar dataKey="downloadGb" name="Reported usage" fill="#635bff" radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </Card>
       <Card title="Throughput over time">
         <ResponsiveContainer width="100%" height={260}>
           <LineChart data={throughput}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#eef1f6" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
             <XAxis dataKey="period" tick={{ fontSize: 10 }} interval={2} />
             <YAxis tick={{ fontSize: 11 }} />
-            <Tooltip />
+            <Tooltip formatter={(v: any) => fmtMbps(Number(v))} />
             <Line type="monotone" dataKey="avgDownloadMbps" name="Download" stroke="#635bff" dot={false} />
             <Line type="monotone" dataKey="avgUploadMbps" name="Upload" stroke="#0ea5e9" dot={false} />
           </LineChart>
@@ -683,6 +698,9 @@ function AccountsPage({ me, reloadKey }: { me: Me; reloadKey: number }) {
   const [accs, setAccs] = useState<ApiAccount[]>([]);
   const [f, setF] = useState({ name: '', clientId: '', clientSecret: '' });
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [overview, setOverview] = useState<ApiAccountOverview | null>(null);
+  const [overviewFor, setOverviewFor] = useState<ApiAccount | null>(null);
+  const [overviewLoading, setOverviewLoading] = useState(false);
 
   const load = useCallback(() => { api.get('/accounts').then((r) => setAccs(r.data)); }, [reloadKey]);
   useEffect(() => { load(); }, [load]);
@@ -731,6 +749,17 @@ function AccountsPage({ me, reloadKey }: { me: Me; reloadKey: number }) {
     }
   };
 
+  const inspect = async (account: ApiAccount) => {
+    setOverviewFor(account); setOverview(null); setOverviewLoading(true);
+    try { setOverview((await api.get(`/accounts/${account.id}/overview`)).data); }
+    catch (e: any) { toast(`Live account overview failed: ${e?.response?.data?.message || e?.message || 'error'}`); }
+    finally { setOverviewLoading(false); }
+  };
+
+  const livePoolCount = overview
+    ? Math.max(overview.dataPools?.length ?? 0, new Set((overview.usageServiceLines || []).flatMap((u: any) => (u.billingCycles || []).flatMap((c: any) => (c.dataPoolUsage || []).map((p: any) => p.dataPoolId).filter(Boolean)))).size)
+    : 0;
+
   return (
     <Card title="Starlink V2 API Accounts" right={<span className="muted">Credentials encrypted at rest (AES-256-GCM)</span>}>
       <p className="muted">Connect a Starlink V2 Business Network service account. Secrets are stored encrypted on the backend and never sent to the browser unencrypted.</p>
@@ -746,12 +775,51 @@ function AccountsPage({ me, reloadKey }: { me: Me; reloadKey: number }) {
           <thead><tr><th>Name</th><th>Client ID</th><th>Status</th><th></th></tr></thead>
           <tbody>
             {accs.map((a) => (
-              <tr key={a.id}><td>{a.name}</td><td>{a.clientId}</td><td><span className="ok">{a.secretConfigured ? 'Configured' : 'Incomplete'}</span></td><td className="row"><button className="ghost" onClick={() => testConn(a.id)} disabled={me.role !== 'admin'}>Test</button>{me.role === 'admin' && <><button className="ghost" onClick={() => edit(a)}>Edit</button><button className="ghost danger" onClick={() => remove(a)}>Delete</button></>}</td></tr>
+              <tr key={a.id}><td>{a.name}</td><td>{a.clientId}</td><td><span className="ok">{a.secretConfigured ? 'Configured' : 'Incomplete'}</span></td><td className="row"><button className="ghost" onClick={() => inspect(a)}>Live overview</button><button className="ghost" onClick={() => testConn(a.id)} disabled={me.role !== 'admin'}>Test</button>{me.role === 'admin' && <><button className="ghost" onClick={() => edit(a)}>Edit</button><button className="ghost danger" onClick={() => remove(a)}>Delete</button></>}</td></tr>
             ))}
             {accs.length === 0 && <tr><td colSpan={4} className="muted">No API accounts yet.</td></tr>}
           </tbody>
         </table>
       </div>
+      {overviewFor && <div className="accountOverview">
+        <div className="tableHead"><h3>Live account overview · {overviewFor.name}</h3><button className="ghost" onClick={() => { setOverviewFor(null); setOverview(null); }}>Close</button></div>
+        {overviewLoading ? <p className="muted">Fetching live account, service lines, terminals, usage, billing and catalog data…</p> : overview && <>
+          <div className="overviewGrid">
+            <div><span className="muted">Account</span><b>{overview.account?.accountName || overview.account?.enterpriseName || overview.account?.accountNumber || '—'}</b></div>
+            <div><span className="muted">Region / mode</span><b>{[overview.account?.regionCode, overview.account?.mode].filter(Boolean).join(' · ') || '—'}</b></div>
+            <div><span className="muted">Service lines</span><b>{overview.serviceLineCount}</b></div>
+            <div><span className="muted">Terminals</span><b>{overview.terminalCount}</b></div>
+          </div>
+          <div className="coverageGrid">
+            <div><span className="muted">Addresses</span><b>{overview.addresses?.length ?? 0}</b></div>
+            <div><span className="muted">Products</span><b>{overview.products?.length ?? 0}</b></div>
+            <div><span className="muted">Data pools</span><b>{livePoolCount}</b></div>
+            <div><span className="muted">Usage feeds</span><b>{overview.usageServiceLines?.length ?? 0}</b></div>
+            <div><span className="muted">Live fetch</span><b className="okText">OK</b></div>
+          </div>
+          <div className="overviewColumns"><div><h4>Balance</h4>{overview.balance.length ? overview.balance.map((b, i) => <div className="dRow" key={i}><span>{b.currency || '—'}</span><b>{b.balance ?? b.dueAmount ?? '—'}</b></div>) : <p className="muted">No balance returned.</p>}</div><div><h4>Recent invoices</h4>{overview.invoices.length ? overview.invoices.slice(0, 5).map((inv, i) => <div className="dRow" key={i}><span>{inv.invoiceDate ? fmtDate(inv.invoiceDate) : inv.invoiceId || '—'}</span><b>{inv.amountDue ?? inv.amount ?? '—'} {inv.currency || ''}</b></div>) : <p className="muted">No invoices returned.</p>}</div></div>
+          <div className="liveList">
+            <h4 style={{ margin: '8px 0 0' }}>Live service lines</h4>
+            {(overview.serviceLines || []).map((line: any) => {
+              const usage = (overview.usageServiceLines || []).find((u: any) => u.serviceLineNumber === line.serviceLineNumber);
+              const cycle = usage?.billingCycles?.[usage.billingCycles.length - 1];
+              return <div className="liveListRow" key={line.serviceLineNumber}><b>{line.nickname || line.serviceLineNumber}</b><span>{line.servicePlan?.name || line.productReferenceId || '—'}</span><span>{line.state || (line.active === false ? 'Inactive' : 'Active')}</span><span>{cycle ? fmtCycle(cycle.startDate, cycle.endDate) : 'Cycle unavailable'}</span></div>;
+            })}
+            {(overview.serviceLines || []).length === 0 && <p className="muted">No service lines returned for this account.</p>}
+          </div>
+          <div className="liveList">
+            <h4 style={{ margin: '8px 0 0' }}>Live terminals</h4>
+            {(overview.terminals || []).map((terminal: any) => <div className="liveListRow" key={terminal.userTerminalId}><b>{terminal.nickname || terminal.userTerminalId}</b><span>{terminal.serviceLineNumber || 'unassigned'}</span><span>{terminal.state || terminal.status || '—'}</span><span>{terminal.kitSerialNumber || terminal.dishSerialNumber || '—'}</span></div>)}
+            {(overview.terminals || []).length === 0 && <p className="muted">No terminals returned for this account.</p>}
+          </div>
+          <div className="liveList">
+            <h4 style={{ margin: '8px 0 0' }}>Live service addresses</h4>
+            {(overview.addresses || []).map((address: any) => <div className="liveListRow" key={address.addressReferenceId}><b>{address.formattedAddress || (address.addressLines || []).join(', ') || address.addressReferenceId}</b><span>{address.locality || '—'}</span><span>{address.regionCode || address.region || '—'}</span><span>{address.latitude != null && address.longitude != null ? `${Number(address.latitude).toFixed(4)}, ${Number(address.longitude).toFixed(4)}` : '—'}</span></div>)}
+            {(overview.addresses || []).length === 0 && <p className="muted">No addresses returned for this account.</p>}
+          </div>
+          <small className="muted">Fetched {fmtDate(overview.fetchedAt)} · reads account, service lines, terminals, data usage, billing, addresses, products and optional data pools. Some resources require separate Starlink permissions.</small>
+        </>}
+      </div>}
     </Card>
   );
 }
@@ -874,6 +942,7 @@ export default function App() {
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
 
   const doRefresh = async () => {
+    if (!me || me.role === 'viewer') return;
     try {
       const r = await api.post('/sites/refresh');
       const refreshed = (r.data.results || []).filter((x: any) => x.ok).length;
@@ -903,6 +972,7 @@ export default function App() {
   // command center stays current without manual clicking. Only linked sites are
   // fetched (using their API Account client Id/secret); unlinked sites are skipped.
   useEffect(() => {
+    if (!me) return;
     let cancelled = false;
     const run = async () => {
       try {
@@ -915,27 +985,27 @@ export default function App() {
     run();
     const timer = setInterval(run, 60000); // refresh every 60s
     return () => { cancelled = true; clearInterval(timer); };
-  }, []);
+  }, [me?.role]);
 
   if (!me) return <Login onAuth={setMe} />;
 
   return (
     <div className="shell">
       <aside>
-        <div className="sideBrand"><span className="brandStar">✦</span> Starlink</div>
+        <div className="sideBrand"><span className="brandStar">✦</span><span className="brandWord">Starlink Hub</span></div>
         <div className="sideSub">Central IT Monitoring</div>
         {NAV.filter((n) => !(n.id === 'Users' && me.role !== 'admin')).map((n) => (
-          <button key={n.id} className={page === n.id ? 'active' : ''} onClick={() => setPage(n.id)}>{n.icon} <span>{n.id}</span></button>
+          <button key={n.id} className={page === n.id ? 'active' : ''} onClick={() => setPage(n.id)} aria-label={n.id}><span className="navIcon">{n.icon}</span><span className="navLabel">{n.id}</span></button>
         ))}
-        <button className="logout" onClick={logout}>Logout</button>
-        <SystemStatus />
+        <button className="logout" onClick={logout} aria-label="Logout"><span className="logoutIcon">↪</span><span className="logoutLabel">Logout</span></button>
+        <SystemStatus reloadKey={reload} />
       </aside>
       <main>
         <header>
           <div><h1>{page}</h1><p>Central IT Monitoring</p></div>
           <div className="top-actions">
             <button className="icon-btn theme-toggle" onClick={toggleTheme} title="Toggle light/dark theme">{theme === 'dark' ? '☀ Light' : '🌙 Dark'}</button>
-            <button className="icon-btn" onClick={doRefresh}>↻ Refresh</button>
+            {me.role !== 'viewer' && <button className="icon-btn" onClick={doRefresh}>↻ Refresh</button>}
             <div className="user"><div className="avatar">{initial(me.ownerName || me.username)}</div><div>{me.ownerName || me.username}<br /><small className="pill2">{me.role}</small></div></div>
           </div>
         </header>

@@ -41,6 +41,7 @@ export interface DataUsageBillingCycle {
   totalStandardGB?: number;
   totalOptInPriorityGB?: number;
   totalNonBillableGB?: number;
+  [key: string]: unknown;
 }
 
 export interface DataUsageServiceLine {
@@ -55,6 +56,7 @@ export interface DataUsageServiceLine {
     isOptedIntoOverage?: boolean;
   };
   lastUpdated?: string;
+  [key: string]: unknown;
 }
 
 export interface DataUsageQueryResponse {
@@ -104,6 +106,8 @@ export interface UserTerminalCacheData {
   alertObstruction?: boolean;
   alertHighPingDropRate?: boolean;
   alertNoSignal?: boolean;
+  state?: string;
+  status?: string;
   [k: string]: unknown;
 }
 
@@ -135,7 +139,14 @@ export interface ServiceLine {
     productId?: string;
     dataBlockProductId?: string;
     usageLimitGB?: number;
+    isoCurrencyCode?: string;
+    isOptedIntoOverage?: boolean;
   };
+  publicIpEnabled?: boolean;
+  isOptedIntoOverage?: boolean;
+  automaticTopUp?: boolean;
+  userTerminals?: string[];
+  [key: string]: unknown;
 }
 
 export interface UserTerminal {
@@ -145,17 +156,53 @@ export interface UserTerminal {
   kitSerialNumber?: string;
   dishSerialNumber?: string;
   serviceLineNumber?: string;
+  status?: string;
+  softwareVersion?: string;
+  hardwareVersion?: string;
+  uptimeSeconds?: number;
+  [key: string]: unknown;
 }
 
 export interface BillingBalance {
   currency?: string;
   balance?: number;
+  dueAmount?: number;
 }
 
 export interface InvoiceSummary {
   invoiceId?: string;
   invoiceDate?: string;
   amountDue?: number;
+  amount?: number;
   currency?: string;
   status?: string;
+}
+
+export interface StarlinkAddress {
+  addressReferenceId?: string;
+  nickname?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  countryCode?: string;
+  latitude?: number;
+  longitude?: number;
+  [key: string]: unknown;
+}
+
+export interface StarlinkProduct {
+  productId?: string;
+  name?: string;
+  description?: string;
+  serviceType?: string;
+  dataBlockGB?: number;
+  [key: string]: unknown;
+}
+
+export interface StarlinkDataPool {
+  dataPoolId?: string;
+  name?: string;
+  [key: string]: unknown;
 }

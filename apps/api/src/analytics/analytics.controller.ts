@@ -5,6 +5,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { UsageRecord } from '../sites/usage-record.entity';
 import { Site } from '../sites/site.entity';
+import { trailingWindowStart } from '../starlink/mapping';
 
 @UseGuards(AuthGuard, RolesGuard)
 @Controller('analytics')
@@ -36,13 +37,15 @@ export class AnalyticsController {
     });
     const owned = await this.sites.find();
     const now = Date.now();
-    const windowMs = mode === 'month' ? 365 * 86400000 : 30 * 86400000;
-    const from = now - windowMs;
+    const from = trailingWindowStart(mode === 'month' ? 365 : 30);
     const filtered = rows.filter((r) => {
       const site = owned.find((s) => s.id === r.siteId);
-      // Out-of-scope sites (non-admin caller doesn't own this site): skip.
+      // Usage records are not cascade-deleted with a site. Ignore orphaned rows
+      // so a deleted site can never inflate live totals.
+      if (!site) return false;
+      // Non-admin callers see only records for sites assigned to them.
       const timestamp = new Date(r.periodStart).getTime();
-      return timestamp >= from && timestamp <= now && (user.role === 'admin' || !site?.ownerUsername || site.ownerUsername === user.username);
+      return timestamp >= from && timestamp <= now && (user.role === 'admin' || site.ownerUsername === user.username);
     });
 
     const buckets: Record<string, any> = {};
@@ -62,8 +65,8 @@ export class AnalyticsController {
       downloadGb: +b.downloadGb.toFixed(1),
       uploadGb: +b.uploadGb.toFixed(1),
       totalGb: +(b.downloadGb + b.uploadGb).toFixed(1),
-      avgDownloadMbps: b.count ? +(b.avgDownloadMbps / b.count).toFixed(1) : 0,
-      avgUploadMbps: b.count ? +(b.avgUploadMbps / b.count).toFixed(1) : 0,
+      avgDownloadMbps: b.count ? +(b.avgDownloadMbps / b.count).toFixed(3) : 0,
+      avgUploadMbps: b.count ? +(b.avgUploadMbps / b.count).toFixed(3) : 0,
       avgLatencyMs: b.count ? +(b.avgLatencyMs / b.count).toFixed(1) : 0,
     }; });
     return throughput ? out.map(({ period, avgDownloadMbps, avgUploadMbps, avgLatencyMs }: any) => ({ period, avgDownloadMbps, avgUploadMbps, avgLatencyMs })) : out;

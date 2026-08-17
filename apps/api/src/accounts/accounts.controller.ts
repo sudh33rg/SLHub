@@ -31,6 +31,13 @@ export class AccountsController {
   @Delete(':id') @Roles('admin')
   remove(@Param('id') id: string) { return this.s.remove(+id); }
 
+  @Post(':id/test-connection') @Roles('admin')
+  async testConnection(@Param('id') id: string) {
+    const acc = await this.s.credentials(+id);
+    const account = await this.starlink.getAccount({ clientId: acc.clientId, clientSecret: acc.clientSecret });
+    return { ok: true, ...account };
+  }
+
   @Post(':id/discover') @Roles('admin')
   async discover(@Param('id') id: string) {
     const acc = await this.s.credentials(+id);
@@ -57,6 +64,42 @@ export class AccountsController {
         nickname: t.nickname,
         state: t.state,
       })),
+    };
+  }
+
+  /** Read-only live account summary for the monitoring UI. Billing endpoints can
+   * require an additional Starlink permission, so they fail soft. */
+  @Get(':id/overview') @Roles('admin', 'operator', 'viewer')
+  async overview(@Param('id') id: string) {
+    const acc = await this.s.credentials(+id);
+    const creds = { clientId: acc.clientId, clientSecret: acc.clientSecret };
+    const [account, serviceLines, terminals, balance, invoices, usageServiceLines, addresses, products, dataPools, dataPoolUsage] = await Promise.all([
+      this.starlink.getAccount(creds),
+      this.starlink.getServiceLines(creds),
+      this.starlink.getUserTerminals(creds).catch(() => [] as any[]),
+      this.starlink.getBillingBalance(creds).catch(() => [] as any[]),
+      this.starlink.getInvoices(creds).catch(() => [] as any[]),
+      this.starlink.queryDataUsage(creds, { previousBillingCycles: 1 }).catch(() => [] as any[]),
+      this.starlink.getAddresses(creds).catch(() => [] as any[]),
+      this.starlink.getProducts(creds).catch(() => [] as any[]),
+      this.starlink.getDataPools(creds).catch(() => [] as any[]),
+      this.starlink.getDataPoolsUsage(creds).catch(() => null),
+    ]);
+    return {
+      ok: true,
+      account,
+      serviceLines,
+      terminals,
+      serviceLineCount: serviceLines.length,
+      terminalCount: terminals.length,
+      balance,
+      invoices: invoices.slice(0, 12),
+      usageServiceLines,
+      addresses,
+      products,
+      dataPools,
+      dataPoolUsage,
+      fetchedAt: new Date().toISOString(),
     };
   }
 }

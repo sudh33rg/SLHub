@@ -86,7 +86,7 @@ export class SitesController {
     return this.s.refresh(req.user.role, req.user.username);
   }
 
-  @Roles('admin', 'operator')
+  @Roles('admin', 'operator', 'viewer')
   @Post('refresh') refresh(@Request() req: any) {
     return this.s.refresh(req.user.role, req.user.username);
   }

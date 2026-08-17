@@ -28,14 +28,15 @@ export class SitesService {
   async findOne(role: Role, username: string, id: number) {
     const s = await this.r.findOne({ where: { id } });
     if (!s) throw new NotFoundException();
-    if (role !== 'admin' && s.ownerUsername && s.ownerUsername !== username)
+    if (role !== 'admin' && s.ownerUsername !== username)
       throw new ForbiddenException('You do not own this site');
     return s;
   }
 
   async create(role: Role, username: string, d: Partial<Site>) {
     if (role !== 'admin') d.ownerUsername = username; // owners can't assign to others
-    const s = this.r.create({ ...d, lastSyncAt: new Date() });
+    const s = this.r.create({ ...d });
+    if (!this.sync.isLinked(s)) s.lastSyncMode = 'none';
     const saved = await this.r.save(s);
     // Pull REAL Starlink data immediately if the site is linked to a V2 API account.
     // Unlinked sites have no data (this is a real-time tool, not a demo — no fabrication).
@@ -93,7 +94,7 @@ export class SitesService {
   async history(siteId: number, role: Role, username: string, days = 30) {
     const s = await this.r.findOne({ where: { id: siteId } });
     if (!s) throw new NotFoundException();
-    if (role !== 'admin' && s.ownerUsername && s.ownerUsername !== username)
+    if (role !== 'admin' && s.ownerUsername !== username)
       throw new ForbiddenException('You do not own this site');
     const to = new Date();
     const from = new Date(to);

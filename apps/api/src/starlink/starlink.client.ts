@@ -10,6 +10,9 @@ import {
   UserTerminal,
   BillingBalance,
   InvoiceSummary,
+  StarlinkAddress,
+  StarlinkProduct,
+  StarlinkDataPool,
 } from './starlink.types';
 
 const BASE = 'https://starlink.com/api/public';
@@ -130,6 +133,11 @@ export class StarlinkClient {
     return this.getPaged<ServiceLine>(creds, '/service-lines');
   }
 
+  /** GET /v2/service-lines/{serviceLineNumber} — full live service-line detail. */
+  getServiceLine(creds: StarlinkCredentials, serviceLineNumber: string): Promise<ServiceLine> {
+    return this.get<ServiceLine>(creds, `/service-lines/${encodeURIComponent(serviceLineNumber)}`);
+  }
+
   /**
    * GET /v2/user-terminals — list user terminals on the account.
    * V2 returns `{ content: { results: UserTerminalResponseV2[] } }` where the
@@ -160,12 +168,40 @@ export class StarlinkClient {
   }
 
   /** GET /v2/billing/balance — current account balance per currency. */
-  getBillingBalance(creds: StarlinkCredentials): Promise<BillingBalance[]> {
-    return this.get<BillingBalance[]>(creds, '/billing/balance');
+  async getBillingBalance(creds: StarlinkCredentials): Promise<BillingBalance[]> {
+    const raw = await this.get<any>(creds, '/billing/balance');
+    // V2 currently returns { balances: [...] } while older responses returned
+    // the array directly. Normalize both shapes for the UI.
+    return Array.isArray(raw) ? raw : (raw?.balances ?? []);
   }
 
   /** GET /v2/billing/invoices — invoice summaries. */
   getInvoices(creds: StarlinkCredentials): Promise<InvoiceSummary[]> {
     return this.get<InvoiceSummary[]>(creds, '/billing/invoices');
+  }
+
+  /** GET /v2/addresses — live service addresses, when the account grants access. */
+  getAddresses(creds: StarlinkCredentials): Promise<StarlinkAddress[]> {
+    return this.getPaged<StarlinkAddress>(creds, '/addresses');
+  }
+
+  /** GET /v2/products — products/plans available to the account. */
+  getProducts(creds: StarlinkCredentials): Promise<StarlinkProduct[]> {
+    return this.getPaged<StarlinkProduct>(creds, '/products');
+  }
+
+  /** GET /v2/data-pools — optional/pre-release multi-service-line pools. */
+  getDataPools(creds: StarlinkCredentials): Promise<StarlinkDataPool[]> {
+    return this.getPaged<StarlinkDataPool>(creds, '/data-pools');
+  }
+
+  /** GET /v2/data-pools/usage — optional/pre-release pool consumption. */
+  getDataPoolsUsage(creds: StarlinkCredentials): Promise<unknown> {
+    return this.get<unknown>(creds, '/data-pools/usage');
+  }
+
+  /** GET /v2/service-lines/{serviceLineNumber}/billing-cycles/partial-periods. */
+  getBillingPartialPeriods(creds: StarlinkCredentials, serviceLineNumber: string): Promise<unknown[]> {
+    return this.get<unknown[]>(creds, `/service-lines/${encodeURIComponent(serviceLineNumber)}/billing-cycles/partial-periods`);
   }
 }

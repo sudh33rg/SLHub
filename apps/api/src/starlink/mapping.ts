@@ -39,16 +39,33 @@ export function mapDataUsageDaily(sl: DataUsageServiceLine): DailyUsagePoint[] {
  * so the Sites table's Usage column and the Analytics page can never disagree.
  */
 export function periodUsageGb(days: DailyUsagePoint[], windowDays = 30): number {
-  const cutoff = Date.now() - windowDays * 86400000;
+  const cutoff = trailingWindowStart(windowDays);
   return days
     .filter((d) => d.periodStart.getTime() >= cutoff)
     .reduce((sum, d) => sum + d.downloadGb + d.uploadGb, 0);
+}
+
+/** Start of the UTC calendar day at the edge of a trailing window. Daily
+ * Starlink records should not disappear because a sync ran a few milliseconds
+ * after the exact N*24-hour boundary. */
+export function trailingWindowStart(windowDays: number): number {
+  const start = new Date();
+  start.setUTCHours(0, 0, 0, 0);
+  start.setUTCDate(start.getUTCDate() - windowDays);
+  return start.getTime();
 }
 
 export interface TelemetrySnapshot {
   downloadMbps: number;
   uploadMbps: number;
   latencyMs: number;
+  terminalState?: string;
+  softwareVersion?: string;
+  uptimeSeconds?: number;
+  obstructionPercent?: number;
+  popPingDropRate?: number;
+  signalQuality?: number;
+  alertCount?: number;
 }
 
 /**
@@ -58,13 +75,24 @@ export interface TelemetrySnapshot {
  */
 export function mapTelemetrySnapshot(ut?: UserTerminalCacheData): TelemetrySnapshot {
   if (!ut) return { downloadMbps: 0, uploadMbps: 0, latencyMs: 0 };
-  return {
+  const snapshot: TelemetrySnapshot = {
     // V2 cache responses use the *Mbps and *Avg names. The shorter aliases
     // are accepted for compatibility with older fixtures.
     downloadMbps: ut.downlinkThroughputMbps ?? ut.downlinkThroughput ?? 0,
     uploadMbps: ut.uplinkThroughputMbps ?? ut.uplinkThroughput ?? 0,
     latencyMs: ut.popPingLatencyMsAvg ?? ut.popPingLatencyMs ?? ut.internetPingLatencyMs ?? 0,
   };
+  const raw = ut as UserTerminalCacheData & Record<string, any>;
+  const terminalState = raw.state ?? raw.status;
+  if (terminalState !== undefined) snapshot.terminalState = String(terminalState);
+  if (raw.softwareVersion !== undefined) snapshot.softwareVersion = String(raw.softwareVersion);
+  if (raw.uptimeSeconds !== undefined) snapshot.uptimeSeconds = Number(raw.uptimeSeconds);
+  if (raw.obstructionPercentTime !== undefined) snapshot.obstructionPercent = Number(raw.obstructionPercentTime);
+  if (raw.popPingDropRateAvg !== undefined) snapshot.popPingDropRate = Number(raw.popPingDropRateAvg);
+  if (raw.signalQuality !== undefined) snapshot.signalQuality = Number(raw.signalQuality);
+  const alertKeys = ['alertHighTimeObstruction', 'alertDataOverageRateLimited', 'alertDisabledNoActiveServiceLine', 'alertObstruction', 'alertHighPingDropRate', 'alertNoSignal'];
+  if (alertKeys.some((key) => key in raw)) snapshot.alertCount = alertKeys.reduce((count, key) => count + (raw[key] === true ? 1 : 0), 0);
+  return snapshot;
 }
 
 /**
